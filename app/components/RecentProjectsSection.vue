@@ -1,14 +1,14 @@
 <template>
   <section
     ref="sectionRef"
-    class="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 pt-0 pb-12 md:pb-16 px-4 md:px-8 lg:px-14"
+    class="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 pt-0 pb-6 md:pb-8 px-4 md:px-8 lg:px-14"
     :class="sectionVisible ? 'opacity-100' : 'opacity-0'"
     :style="{ backgroundColor: 'white' }"
     id="projets"
   >
     <div class="w-full p-2 sm:px-4 ">
       <h2
-        class="mt-5 text-left text-2xl font-bold text-[#d84c4c] transition-all duration-700 ease-out md:mb-10 md:text-3xl"
+        class="mt-3 text-left text-2xl font-bold text-[#d84c4c] transition-all duration-700 ease-out md:mb-10 md:text-3xl"
         :class="sectionVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'"
       >
         {{ t.title }}

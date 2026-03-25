@@ -4,4 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   modules: ['@nuxtjs/tailwindcss'],
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/assets/logo.png' },
+        { rel: 'apple-touch-icon', href: '/assets/logo.png' },
+      ],
+    },
+  },
 })

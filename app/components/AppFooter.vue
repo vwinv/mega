@@ -1,22 +1,22 @@
 <template>
   <footer class="w-full bg-[#d84c4c] text-white">
     <div
-      class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-12 md:grid-cols-2 md:gap-10 md:px-10 md:py-16 lg:grid-cols-4 lg:gap-8"
+      class="mx-auto grid max-w-7xl grid-cols-1 gap-y-8 px-6 py-10 md:grid-cols-2 md:gap-x-10 md:gap-y-10 md:px-10 md:py-16 lg:grid-cols-4 lg:gap-8"
     >
-      <!-- Colonne 1 : logo vertical MEGA -->
-      <div class="flex justify-center md:justify-start">
-        <div class="flex items-center justify-center md:justify-start">
+      <!-- Mobile : logo + Contact Infos sur une seule ligne (flex). md+ : children dans la grille via contents -->
+      <div class="flex flex-row items-start gap-3 md:contents">
+        <div class="flex shrink-0 items-start justify-start md:justify-start">
           <img
             src="/assets/logowhite.png"
             alt="MEGA"
-            class="h-auto w-auto max-h-44 sm:max-h-52 object-contain"
+            class="h-auto w-auto max-h-9 object-contain sm:max-h-11 md:max-h-44 lg:max-h-52"
           />
         </div>
-      </div>
 
-      <!-- Colonne 2 : Contact Infos -->
-      <div class="min-w-0">
-        <h3 class="mb-5 text-base font-bold sm:text-lg">{{ t.contactInfos }}</h3>
+        <div class="min-w-0 flex-1 md:min-w-0">
+          <h3 class="mb-4 text-base font-bold leading-tight sm:mb-5 sm:text-lg md:mb-5">
+            {{ t.contactInfos }}
+          </h3>
         <ul class="flex flex-col gap-4 text-sm font-normal sm:text-base">
           <li class="flex gap-3">
             <svg
@@ -87,6 +87,7 @@
             </span>
           </li>
         </ul>
+        </div>
       </div>
 
       <!-- Colonne 3 : MEGA -->
