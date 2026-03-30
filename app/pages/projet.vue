@@ -11,7 +11,7 @@
           {{ t.heroTitle }}
         </h1>
         <p class="mt-4 text-base leading-7 text-white md:text-lg">
-         {{ t.heroSubtitle }}
+          {{ t.heroSubtitle }}
         </p>
       </div>
     </div>
@@ -88,32 +88,39 @@ const projectsByLocale = {
     title: 'Yohride',
     image: '/assets/yohrideapp.png',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
+      'Yohride est une plateforme de location de voitures qui permet de réserver facilement un véhicule adapté à ses besoins. Elle offre une solution simple, rapide et fiable pour les déplacements personnels, professionnels ou touristiques.',
     actions: [
-      { label: "Télécharger l'application", to: '/contact' },
-      { label: 'Visiter le site', to: '/contact' },
+      { label: "Télécharger sur Playstore", to: 'https://play.google.com/store/apps/details?id=com.yohride.app' },
+      { label: "Télécharger sur Appstore", to: 'https://apps.apple.com/us/app/yohride/id6752221198' },
     ],
   },
   {
     title: 'Mille Services',
     image: '/assets/milleserviceapp.png',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
+      "Mille Services est une plateforme de mise en relation entre particuliers et prestataires (plomberie, électricité, ménage, etc.). Le projet comprend une application mobile permettant aux utilisateurs de trouver et réserver facilement un professionnel, ainsi qu’un dashboard d’administration pour la gestion des services, des utilisateurs et des demandes.",
     actions: [{ label: "Télécharger l'application", to: '/contact' }],
   },
   {
     title: 'The Lightbulb Agency',
+    image: '/assets/lightbulbsite.png',
+    description:
+      'Site vitrine réalisé pour The Lightbulb Agency, présentant ses services, son expertise et ses réalisations. Conçu pour offrir une navigation fluide et valoriser l’image de l’agence, il met en avant son identité et facilite la prise de contact.',
+    actions: [{ label: 'Voir le site', to: 'https://lightbulb-agency.com/' }],
+  },
+  {
+    title: 'Theta Ingénierie',
     image: '/assets/thetasite.png',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
-    actions: [{ label: 'Voir le site', to: '/contact' }],
+      'Site vitrine conçu pour Theta Ingénierie, mettant en avant ses services, son expertise et ses projets. L’objectif est de valoriser son savoir-faire, renforcer sa présence en ligne et faciliter la mise en relation avec ses clients.',
+    actions: [{ label: 'Voir le site', to: 'https://theta-ingenierie.com/' }],
   },
   {
     title: 'Al Madinah boutique',
     image: '/assets/almadinasite.png',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
-    actions: [{ label: 'Voir le site', to: '/contact' }],
+      'Site vitrine réalisé pour Al Madinah Boutique, mettant en avant ses produits et son univers. Conçu pour valoriser la marque, renforcer sa présence en ligne et faciliter le contact avec les clients.',
+    actions: [{ label: 'Voir le site', to: 'https://almadinahboutique.com/boutique/' }],
   },
   ],
   en: [
@@ -121,40 +128,47 @@ const projectsByLocale = {
       title: 'Yohride',
       image: '/assets/yohrideapp.png',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
+        'Yohride is a car rental platform that lets you book the right vehicle quickly. It delivers a straightforward, dependable experience for personal trips, business travel, or holidays.',
       actions: [
-        { label: 'Download the app', to: '/contact' },
-        { label: 'Visit the website', to: '/contact' },
+        { label: 'Get it on Google Play', to: 'https://play.google.com/store/apps/details?id=com.yohride.app' },
+        { label: 'Download on the App Store', to: 'https://apps.apple.com/us/app/yohride/id6752221198' },
       ],
     },
     {
       title: 'Mille Services',
       image: '/assets/milleserviceapp.png',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
+        'Mille Services connects people with local professionals (plumbing, electrical, housekeeping, and similar trades). The scope covers a consumer mobile app to discover and book a provider, and an administration dashboard to run services, users, and incoming requests.',
       actions: [{ label: 'Download the app', to: '/contact' }],
     },
     {
       title: 'The Lightbulb Agency',
+      image: '/assets/lightbulbsite.png',
+      description:
+        'Marketing site for The Lightbulb Agency presenting its offer, expertise, and selected projects. The interface favors fluid navigation, a polished brand image, and quick ways to start a conversation.',
+      actions: [{ label: 'Visit the website', to: 'https://lightbulb-agency.com/' }],
+    },
+    {
+      title: 'Theta Ingénierie',
       image: '/assets/thetasite.png',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
-      actions: [{ label: 'Visit the website', to: '/contact' }],
+        'Corporate site for Theta Ingénierie showcasing its services, technical expertise, and project track record—aimed at highlighting its capabilities, growing visibility, and simplifying how prospects and clients connect.',
+      actions: [{ label: 'Visit the website', to: 'https://theta-ingenierie.com/' }],
     },
     {
       title: 'Al Madinah boutique',
       image: '/assets/almadinasite.png',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra.',
-      actions: [{ label: 'Visit the website', to: '/contact' }],
+        'Brochure site for Al Madinah Boutique, putting products and brand story in focus—designed to elevate the label, strengthen its web presence, and make it easy for customers to get in touch.',
+      actions: [{ label: 'Visit the website', to: 'https://almadinahboutique.com/boutique/' }],
     },
   ],
 } as const
 
 const translations = {
   fr: {
-    heroTitle: 'Des projets concrets. Des resultats mesurables.',
-    heroSubtitle: 'Decouvrez comment nous transformons les ambitions en succes durables.',
+    heroTitle: 'Des projets concrets. Des résultats mesurables.',
+    heroSubtitle: 'Découvrez comment nous transformons les ambitions en succès durables.',
     breadcrumb: 'Projet',
   },
   en: {

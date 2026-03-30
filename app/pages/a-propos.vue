@@ -68,6 +68,8 @@
       </div>
     </div>
 
+    <AboutTeamSection />
+
     <div
       ref="visionSectionRef"
       class="relative mx-auto mt-6 w-full max-w-6xl overflow-hidden bg-[#efefef] transition-all duration-700"
