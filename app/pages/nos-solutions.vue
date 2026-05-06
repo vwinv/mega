@@ -102,26 +102,48 @@
 <script setup lang="ts">
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
 
-const solutions = [
-  {
-    title: 'CRM',
-    image: '/assets/valeur1.png',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
-  },
-  {
-    title: 'BOUTIQUE',
-    image: '/assets/valeur2.png',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
-  },
-  {
-    title: 'POURPRE',
-    image: '/assets/valeur3.png',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
-  },
-] as const
+const solutionsByLocale = {
+  fr: [
+    {
+      title: 'LINK',
+      image: '/assets/valeur1.png',
+      description:
+        'Application mobile de creation de cartes de visite digitales, partageables instantanement (AirDrop, WhatsApp, etc.) et accessibles via wallet. Possibilite d ajouter un portfolio pour une presentation professionnelle complete.',
+    },
+    /*{
+      title: 'BOUTIQUE',
+      image: '/assets/valeur2.png',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
+    }, */
+    {
+      title: 'POURPRE',
+      image: '/assets/valeur3.png',
+      description:
+        'Pourpre est une application mobile et web concue pour accompagner les femmes dans la comprehension et le suivi de leur cycle menstruel, leur equilibre hormonal et leur bien-etre global. L application se veut douce, inclusive et culturellement adaptee aux femmes africaines',
+    },
+  ],
+  en: [
+    {
+      title: 'LINK',
+      image: '/assets/valeur1.png',
+      description:
+        'A mobile app for creating digital business cards, instantly shareable (AirDrop, WhatsApp, etc.) and accessible through a wallet. It also allows users to add a portfolio for a complete professional presentation.',
+    },
+    /*{
+      title: 'BOUTIQUE',
+      image: '/assets/valeur2.png',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.',
+    }, */
+    {
+      title: 'POURPRE',
+      image: '/assets/valeur3.png',
+      description:
+        'Pourpre is a mobile and web app designed to support women in understanding and tracking their menstrual cycle, hormonal balance, and overall well-being. The app is intended to be gentle, inclusive, and culturally adapted for African women.',
+    },
+  ],
+} as const
 
 const translations = {
   fr: {
@@ -145,6 +167,7 @@ const translations = {
 } as const
 
 const t = computed(() => translations[locale.value])
+const solutions = computed(() => solutionsByLocale[locale.value])
 
 const isPopupOpen = ref(false)
 const headerSectionRef = ref<HTMLElement | null>(null)

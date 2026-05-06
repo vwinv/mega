@@ -86,17 +86,17 @@ const props = withDefaults(
       {
         title: 'Al Madinah Boutique',
         image: '/assets/almadinasite.png',
-        url: '#',
+        url: 'https://almadinahboutique.com/boutique/',
       },
       {
         title: 'Theta Ingénierie',
         image: '/assets/thetasite.png',
-        url: '#',
+        url: 'https://theta-ingenierie.com/',
       },
       {
         title: 'Mountazar Deco',
         image: '/assets/mountazarsite.png',
-        url: '#',
+        url: 'https://www.mountazardeco.com/boutique',
       },
     ],
   }
