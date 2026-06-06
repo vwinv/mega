@@ -69,9 +69,26 @@ onMounted(() => {
   onUnmounted(() => observer.disconnect())
 })
 
-useSeoMeta({
-  title: 'MEGA',
-  description: 'Digital showcase website.',
+const seoByLocale = {
+  fr: {
+    title: 'Transformation digitale au Senegal',
+    description:
+      'MEGA accompagne les entreprises au Senegal dans leur transformation digitale : developpement web, mobile, IA et solutions sur mesure a Dakar.',
+  },
+  en: {
+    title: 'Digital transformation in Senegal',
+    description:
+      'MEGA supports companies in Senegal with digital transformation: web, mobile, AI and custom software solutions in Dakar.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/',
+  image: '/assets/header.png',
 })
 </script>
 

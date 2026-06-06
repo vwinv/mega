@@ -6,5 +6,11 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: 'Politique de confidentialité' })
+usePageSeo({
+  title: 'Politique de confidentialite',
+  description:
+    'Consultez la politique de confidentialite de MEGA : protection des donnees, cookies et utilisation des informations personnelles.',
+  path: '/politique-confidentialite',
+  noindex: true,
+})
 </script>

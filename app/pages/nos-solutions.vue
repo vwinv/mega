@@ -214,5 +214,25 @@ onMounted(() => {
   onUnmounted(() => observer.disconnect())
 })
 
-useSeoMeta({ title: computed(() => t.value.breadcrumb) })
+const seoByLocale = {
+  fr: {
+    title: 'Nos solutions digitales',
+    description:
+      'Decouvrez LINK, Pourpre et les solutions digitales MEGA concues pour repondre aux enjeux metiers des entreprises.',
+  },
+  en: {
+    title: 'Our digital solutions',
+    description:
+      'Discover LINK, Pourpre and MEGA digital solutions designed to solve real business challenges.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/nos-solutions',
+  image: '/assets/headersolution.png',
+})
 </script>

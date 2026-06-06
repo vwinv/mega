@@ -5,9 +5,37 @@
       <slot />
     </main>
     <AppFooter />
-    <FloatingAIChat />
   </div>
 </template>
+
+<script setup lang="ts">
+const config = useRuntimeConfig()
+const siteUrl = String(config.public.siteUrl || 'https://mega-sn.com').replace(/\/$/, '')
+
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'MEGA',
+        url: siteUrl,
+        logo: `${siteUrl}/assets/logo.png`,
+        email: 'contact@mega-sn.com',
+        telephone: '+221784504052',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Sacre coeur 2, pres de OBV',
+          addressLocality: 'Dakar',
+          addressCountry: 'SN',
+        },
+        sameAs: [],
+      }),
+    },
+  ],
+})
+</script>
 
 <style scoped>
 .layout {

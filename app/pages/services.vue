@@ -514,5 +514,25 @@ onMounted(() => {
   onUnmounted(() => cardsObserver.disconnect())
 })
 
-useSeoMeta({ title: computed(() => t.value.breadcrumb) })
+const seoByLocale = {
+  fr: {
+    title: 'Services digitaux',
+    description:
+      'Decouvrez les services MEGA : gouvernance IT, UX/UI, developpement logiciel et intelligence artificielle pour entreprises au Senegal.',
+  },
+  en: {
+    title: 'Digital services',
+    description:
+      'Explore MEGA services: IT governance, UX/UI, software development and artificial intelligence for businesses in Senegal.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/services',
+  image: '/assets/headerservices.png',
+})
 </script>

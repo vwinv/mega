@@ -291,5 +291,24 @@ async function onSubmit() {
   }
 }
 
-useSeoMeta({ title: computed(() => t.value.pageTitle) })
+const seoByLocale = {
+  fr: {
+    title: 'Contactez MEGA',
+    description:
+      'Contactez l equipe MEGA a Dakar pour votre projet digital. Demandez un devis ou un accompagnement personnalise.',
+  },
+  en: {
+    title: 'Contact MEGA',
+    description:
+      'Contact the MEGA team in Dakar for your digital project. Request a quote or personalized support.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/contact',
+})
 </script>

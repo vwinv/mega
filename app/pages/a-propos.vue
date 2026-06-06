@@ -333,7 +333,27 @@ onMounted(() => {
   })
 })
 
-useSeoMeta({ title: 'A propos' })
+const seoByLocale = {
+  fr: {
+    title: 'A propos de MEGA',
+    description:
+      'MEGA est une agence digitale senegalaise specialisee en transformation digitale, developpement web/mobile et innovation technologique a Dakar.',
+  },
+  en: {
+    title: 'About MEGA',
+    description:
+      'MEGA is a Senegalese digital agency specialized in digital transformation, web/mobile development and technology innovation in Dakar.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/a-propos',
+  image: '/assets/headerpropos.png',
+})
 </script>
 
 <style scoped>

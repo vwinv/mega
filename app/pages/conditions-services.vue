@@ -6,5 +6,11 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ title: 'Conditions et services' })
+usePageSeo({
+  title: 'Conditions et services',
+  description:
+    'Consultez les conditions generales et les modalites de services proposes par MEGA pour vos projets digitaux.',
+  path: '/conditions-services',
+  noindex: true,
+})
 </script>

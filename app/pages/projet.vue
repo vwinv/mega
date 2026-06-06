@@ -217,5 +217,25 @@ onMounted(() => {
   onUnmounted(() => observer.disconnect())
 })
 
-useSeoMeta({ title: computed(() => t.value.breadcrumb) })
+const seoByLocale = {
+  fr: {
+    title: 'Projets et realisations',
+    description:
+      'Decouvrez les projets MEGA : applications web, mobile et solutions digitales livrees pour des entreprises au Senegal et en Afrique.',
+  },
+  en: {
+    title: 'Projects and case studies',
+    description:
+      'Explore MEGA projects: web apps, mobile apps and digital solutions delivered for companies in Senegal and Africa.',
+  },
+} as const
+
+const seo = computed(() => seoByLocale[locale.value])
+
+usePageSeo({
+  title: computed(() => seo.value.title),
+  description: computed(() => seo.value.description),
+  path: '/projet',
+  image: '/assets/headerprojet.png',
+})
 </script>
