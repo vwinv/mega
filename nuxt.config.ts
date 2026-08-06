@@ -22,8 +22,11 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#d84c4c' },
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/assets/logo.png' },
-        { rel: 'apple-touch-icon', href: '/assets/logo.png' },
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'icon', type: 'image/png', href: '/icon-48.png', sizes: '48x48' },
+        { rel: 'icon', type: 'image/png', href: '/icon-192.png', sizes: '192x192' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
       ],
     },
   },

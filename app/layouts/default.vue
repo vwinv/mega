@@ -21,7 +21,7 @@ useHead({
         '@type': 'Organization',
         name: 'MEGA',
         url: siteUrl,
-        logo: `${siteUrl}/assets/logo.png`,
+        logo: `${siteUrl}/assets/logo-square.png`,
         email: 'contact@mega-sn.com',
         telephone: '+221784504052',
         address: {

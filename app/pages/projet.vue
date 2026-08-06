@@ -99,7 +99,10 @@ const projectsByLocale = {
     image: '/assets/milleserviceapp.png',
     description:
       "Mille Services est une plateforme de mise en relation entre particuliers et prestataires (plomberie, électricité, ménage, etc.). Le projet comprend une application mobile permettant aux utilisateurs de trouver et réserver facilement un professionnel, ainsi qu’un dashboard d’administration pour la gestion des services, des utilisateurs et des demandes.",
-    actions: [{ label: "Télécharger l'application", to: '/contact' }],
+    actions: [
+      { label: 'Télécharger sur Playstore', to: 'https://play.google.com/store/apps/details?id=com.mille.services' },
+      { label: 'Télécharger sur Appstore', to: 'https://apps.apple.com/us/app/mille-services/id6760831174' },
+    ],
   },
   {
     title: 'The Lightbulb Agency',
@@ -139,7 +142,10 @@ const projectsByLocale = {
       image: '/assets/milleserviceapp.png',
       description:
         'Mille Services connects people with local professionals (plumbing, electrical, housekeeping, and similar trades). The scope covers a consumer mobile app to discover and book a provider, and an administration dashboard to run services, users, and incoming requests.',
-      actions: [{ label: 'Download the app', to: '/contact' }],
+      actions: [
+        { label: 'Get it on Google Play', to: 'https://play.google.com/store/apps/details?id=com.mille.services' },
+        { label: 'Download on the App Store', to: 'https://apps.apple.com/us/app/mille-services/id6760831174' },
+      ],
     },
     {
       title: 'The Lightbulb Agency',
