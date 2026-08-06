@@ -105,6 +105,13 @@ const projectsByLocale = {
     ],
   },
   {
+    title: 'Tooky Consulting',
+    image: '/assets/tooky.png',
+    description:
+      "Tooky Consulting est un cabinet de conseil spécialisé dans l'accompagnement des entreprises dans leur transformation et leur développement. Il propose des services de conseil stratégique, de digitalisation, de gestion de projets et d'optimisation des processus afin d'améliorer la performance et la compétitivité de ses clients. Le cabinet intervient auprès d'organisations de différents secteurs en apportant des solutions adaptées à leurs enjeux de croissance et d'innovation.",
+    actions: [{ label: 'Voir le site', to: 'https://tookyconsulting.com' }],
+  },
+  {
     title: 'The Lightbulb Agency',
     image: '/assets/lightbulbsite.png',
     description:
@@ -146,6 +153,13 @@ const projectsByLocale = {
         { label: 'Get it on Google Play', to: 'https://play.google.com/store/apps/details?id=com.mille.services' },
         { label: 'Download on the App Store', to: 'https://apps.apple.com/us/app/mille-services/id6760831174' },
       ],
+    },
+    {
+      title: 'Tooky Consulting',
+      image: '/assets/tooky.png',
+      description:
+        'Tooky Consulting is a consulting firm specialized in supporting companies through transformation and growth. It offers strategic consulting, digitalization, project management, and process optimization to improve clients’ performance and competitiveness. The firm works with organizations across sectors, delivering solutions tailored to their growth and innovation challenges.',
+      actions: [{ label: 'Visit the website', to: 'https://tookyconsulting.com' }],
     },
     {
       title: 'The Lightbulb Agency',
