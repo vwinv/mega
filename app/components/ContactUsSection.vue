@@ -4,14 +4,14 @@
   >
     <div
       ref="sectionRef"
-      class="relative min-h-[320px] overflow-hidden rounded-2xl md:min-h-[380px]"
+      class="relative min-h-[320px] md:min-h-[380px]"
       aria-label="Contact"
       :class="sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'"
       style="transition: opacity 700ms ease-out, transform 700ms ease-out"
     >
       <!-- Fond -->
       <div
-        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        class="absolute inset-0 overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat"
         :style="{ backgroundImage: 'url(/assets/bgcontact.png)' }"
         aria-hidden="true"
       />
@@ -20,9 +20,9 @@
       <img
         src="/assets/imgcontact.png"
         alt=""
-        class="pointer-events-none absolute right-0 top-1/2 z-[1] h-[78%] max-h-[300px] w-auto max-w-[min(56%,20rem)] -translate-y-1/2 object-contain object-right pr-2 md:h-[88%] md:max-h-[360px] md:max-w-[min(50%,24rem)] md:pr-6"
-        width="320"
-        height="360"
+        class="pointer-events-none absolute bottom-0 right-0 z-[1] h-[95%] w-auto max-w-[min(68%,22rem)] origin-bottom-right object-contain object-bottom object-right md:h-[105%] md:max-w-[min(58%,30rem)] md:scale-110 lg:max-w-[min(52%,34rem)] lg:scale-125"
+        width="635"
+        height="560"
         loading="lazy"
       />
 
@@ -68,25 +68,6 @@ const translations = {
 } as const
 
 const t = computed(() => translations[locale.value])
-
-const sectionRef = ref<HTMLElement | null>(null)
-const sectionVisible = ref(false)
-
-onMounted(() => {
-  const el = sectionRef.value
-  if (!el) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        sectionVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.15 }
-  )
-
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
+const { el: sectionRef, visible: sectionVisible } = useOnceReveal({ threshold: 0.15 })
 </script>
 

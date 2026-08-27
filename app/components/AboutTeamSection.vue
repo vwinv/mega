@@ -441,22 +441,9 @@ function avatarStyleForMember(member: Member) {
   return avatarStyle(memberIndex(member.nameKey))
 }
 
-const sectionRef = ref<HTMLElement | null>(null)
-const visible = ref(false)
-
-onMounted(() => {
-  const el = sectionRef.value
-  if (!el) return
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) visible.value = true
-      })
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  )
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
+const { el: sectionRef, visible } = useOnceReveal({
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px',
 })
 
 onBeforeUnmount(() => {

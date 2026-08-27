@@ -84,6 +84,11 @@ const props = withDefaults(
     seeMoreUrl: '/projet',
     projects: () => [
       {
+        title: 'Commonwealth School',
+        image: '/assets/commonwalthsite.png',
+        url: 'https://www.commonwealth-school.com/',
+      },
+      {
         title: 'Al Madinah Boutique',
         image: '/assets/almadinasite.png',
         url: 'https://almadinahboutique.com/boutique/',
@@ -92,11 +97,6 @@ const props = withDefaults(
         title: 'Theta Ingénierie',
         image: '/assets/thetasite.png',
         url: 'https://theta-ingenierie.com/',
-      },
-      {
-        title: 'Mountazar Deco',
-        image: '/assets/mountazarsite.png',
-        url: 'https://www.mountazardeco.com/boutique',
       },
     ],
   }
@@ -109,25 +109,7 @@ const translations = {
   en: { title: 'Recent projects', visitSite: 'Visit website', seeMore: 'See more +' },
 } as const
 const t = computed(() => translations[locale.value])
-const sectionRef = ref<HTMLElement | null>(null)
-const sectionVisible = ref(false)
-
-onMounted(() => {
-  const el = sectionRef.value
-  if (!el) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        sectionVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.2 }
-  )
-
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
+const { el: sectionRef, visible: sectionVisible } = useOnceReveal({ threshold: 0.2 })
 
 function linkAttrs(url: string) {
   if (/^https?:\/\//i.test(url)) {

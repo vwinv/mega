@@ -58,9 +58,10 @@ const props = withDefaults(
   }
 )
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
-
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
+const { el: sectionRef, visible: isVisible } = useOnceReveal({
+  threshold: 0.15,
+  rootMargin: '0px 0px -50px 0px',
+})
 
 const sizeClasses: Record<string, string> = {
   xs: 'text-xl md:text-2xl',
@@ -109,19 +110,4 @@ const displayServices = computed(() =>
     offset: offsets[i % offsets.length],
   }))
 )
-
-onMounted(() => {
-  const el = sectionRef.value
-  if (!el) return
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        isVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
-  )
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
 </script>

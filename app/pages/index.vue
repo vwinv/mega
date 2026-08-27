@@ -48,26 +48,7 @@ const heroByLocale = {
   },
 } as const
 const hero = computed(() => heroByLocale[locale.value])
-
-const headerSectionRef = ref<HTMLElement | null>(null)
-const headerVisible = ref(false)
-
-onMounted(() => {
-  const el = headerSectionRef.value
-  if (!el) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        headerVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.2 }
-  )
-
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
+const { el: headerSectionRef, visible: headerVisible } = useOnceReveal({ threshold: 0.2 })
 
 const seoByLocale = {
   fr: {

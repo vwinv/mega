@@ -258,15 +258,11 @@ const translations = {
 
 const valuesList = computed(() => valuesByLocale[locale.value])
 const t = computed(() => translations[locale.value])
+const { el: headerSectionRef, visible: headerVisible } = useOnceReveal({ threshold: 0.25 })
+const { el: aboutSectionRef, visible: aboutVisible } = useOnceReveal({ threshold: 0.25 })
+const { el: visionSectionRef, visible: visionVisible } = useOnceReveal({ threshold: 0.25 })
+const { el: valuesSectionRef, visible: valuesVisible } = useOnceReveal({ threshold: 0.25 })
 
-const headerSectionRef = ref<HTMLElement | null>(null)
-const aboutSectionRef = ref<HTMLElement | null>(null)
-const visionSectionRef = ref<HTMLElement | null>(null)
-const valuesSectionRef = ref<HTMLElement | null>(null)
-const headerVisible = ref(false)
-const aboutVisible = ref(false)
-const visionVisible = ref(false)
-const valuesVisible = ref(false)
 const currentValueSlide = ref(0)
 let valuesTimer: ReturnType<typeof setInterval> | null = null
 const desktopOffsets = [-1, 0, 1] as const
@@ -300,37 +296,12 @@ function stopValuesSlider() {
   valuesTimer = null
 }
 
-onMounted(() => {
-  const entries = [
-    { el: headerSectionRef.value, set: (v: boolean) => (headerVisible.value = v) },
-    { el: aboutSectionRef.value, set: (v: boolean) => (aboutVisible.value = v) },
-    { el: visionSectionRef.value, set: (v: boolean) => (visionVisible.value = v) },
-    { el: valuesSectionRef.value, set: (v: boolean) => (valuesVisible.value = v), isValues: true },
-  ].filter((item) => item.el)
+watch(valuesVisible, (isVisible) => {
+  if (isVisible) startValuesSlider()
+})
 
-  if (!entries.length) return
-
-  const observer = new IntersectionObserver(
-    (obsEntries) => {
-      obsEntries.forEach((entry) => {
-        const target = entries.find((item) => item.el === entry.target)
-        if (!target) return
-        target.set(entry.isIntersecting)
-        if (target.isValues && entry.isIntersecting) {
-          startValuesSlider()
-        } else if (target.isValues && !entry.isIntersecting) {
-          stopValuesSlider()
-        }
-      })
-    },
-    { threshold: 0.25 }
-  )
-
-  entries.forEach((item) => observer.observe(item.el as Element))
-  onUnmounted(() => {
-    observer.disconnect()
-    stopValuesSlider()
-  })
+onUnmounted(() => {
+  stopValuesSlider()
 })
 
 const seoByLocale = {

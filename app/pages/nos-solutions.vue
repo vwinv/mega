@@ -105,7 +105,7 @@ const locale = useState<'fr' | 'en'>('locale', () => 'fr')
 const solutionsByLocale = {
   fr: [
     {
-      title: 'LINK',
+      title: 'DROP ONE',
       image: '/assets/valeur1.png',
       description:
         'Application mobile de creation de cartes de visite digitales, partageables instantanement (AirDrop, WhatsApp, etc.) et accessibles via wallet. Possibilite d ajouter un portfolio pour une presentation professionnelle complete.',
@@ -125,7 +125,7 @@ const solutionsByLocale = {
   ],
   en: [
     {
-      title: 'LINK',
+      title: 'DROP ONE',
       image: '/assets/valeur1.png',
       description:
         'A mobile app for creating digital business cards, instantly shareable (AirDrop, WhatsApp, etc.) and accessible through a wallet. It also allows users to add a portfolio for a complete professional presentation.',
@@ -168,12 +168,10 @@ const translations = {
 
 const t = computed(() => translations[locale.value])
 const solutions = computed(() => solutionsByLocale[locale.value])
+const { el: headerSectionRef, visible: headerVisible } = useOnceReveal({ threshold: 0.2 })
+const { el: cardsSectionRef, visible: cardsVisible } = useOnceReveal({ threshold: 0.2 })
 
 const isPopupOpen = ref(false)
-const headerSectionRef = ref<HTMLElement | null>(null)
-const headerVisible = ref(false)
-const cardsSectionRef = ref<HTMLElement | null>(null)
-const cardsVisible = ref(false)
 
 function showComingSoon() {
   isPopupOpen.value = true
@@ -183,47 +181,16 @@ function closePopup() {
   isPopupOpen.value = false
 }
 
-onMounted(() => {
-  const headerEl = headerSectionRef.value
-  if (headerEl) {
-    const headerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          headerVisible.value = entry.isIntersecting
-        })
-      },
-      { threshold: 0.2 }
-    )
-    headerObserver.observe(headerEl)
-    onUnmounted(() => headerObserver.disconnect())
-  }
-
-  const el = cardsSectionRef.value
-  if (!el) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        cardsVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.2 }
-  )
-
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
-
 const seoByLocale = {
   fr: {
     title: 'Nos solutions digitales',
     description:
-      'Decouvrez LINK, Pourpre et les solutions digitales MEGA concues pour repondre aux enjeux metiers des entreprises.',
+      'Decouvrez DROP ONE, Pourpre et les solutions digitales MEGA concues pour repondre aux enjeux metiers des entreprises.',
   },
   en: {
     title: 'Our digital solutions',
     description:
-      'Discover LINK, Pourpre and MEGA digital solutions designed to solve real business challenges.',
+      'Discover DROP ONE, Pourpre and MEGA digital solutions designed to solve real business challenges.',
   },
 } as const
 

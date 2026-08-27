@@ -396,6 +396,8 @@ const content = {
 
 const t = computed(() => content[locale.value])
 const services = computed(() => t.value.services)
+const { el: headerSectionRef, visible: headerVisible } = useOnceReveal({ threshold: 0.2 })
+const { el: cardsSectionRef, visible: cardsVisible } = useOnceReveal({ threshold: 0.15 })
 
 const servicePairs = computed(() => {
   const list = services.value
@@ -407,11 +409,6 @@ const servicePairs = computed(() => {
   }
   return { pairs, featured }
 })
-
-const headerSectionRef = ref<HTMLElement | null>(null)
-const headerVisible = ref(false)
-const cardsSectionRef = ref<HTMLElement | null>(null)
-const cardsVisible = ref(false)
 
 const quoteModalOpen = ref(false)
 const selectedServiceTitle = ref<string | null>(null)
@@ -483,36 +480,6 @@ async function submitQuote() {
     quoteSending.value = false
   }
 }
-
-onMounted(() => {
-  const headerEl = headerSectionRef.value
-  if (headerEl) {
-    const headerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          headerVisible.value = entry.isIntersecting
-        })
-      },
-      { threshold: 0.2 }
-    )
-    headerObserver.observe(headerEl)
-    onUnmounted(() => headerObserver.disconnect())
-  }
-
-  const cardsEl = cardsSectionRef.value
-  if (!cardsEl) return
-
-  const cardsObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        cardsVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.15 }
-  )
-  cardsObserver.observe(cardsEl)
-  onUnmounted(() => cardsObserver.disconnect())
-})
 
 const seoByLocale = {
   fr: {

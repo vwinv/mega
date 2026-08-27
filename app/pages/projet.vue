@@ -112,6 +112,13 @@ const projectsByLocale = {
     actions: [{ label: 'Voir le site', to: 'https://tookyconsulting.com' }],
   },
   {
+    title: 'Commonwealth School',
+    image: '/assets/commonwalthsite.png',
+    description:
+      "Site conçu pour Commonwealth Preschool of Abidjan, une école inspirée de la pédagogie finlandaise. Au-delà de la vitrine, le projet comprend un espace parent pour suivre la scolarité, les inscriptions et les échanges avec l’établissement, ainsi qu’un espace administration permettant à l’équipe de gérer les classes, les dossiers et le quotidien de l’école.",
+    actions: [{ label: 'Voir le site', to: 'https://www.commonwealth-school.com/' }],
+  },
+  {
     title: 'The Lightbulb Agency',
     image: '/assets/lightbulbsite.png',
     description:
@@ -162,6 +169,13 @@ const projectsByLocale = {
       actions: [{ label: 'Visit the website', to: 'https://tookyconsulting.com' }],
     },
     {
+      title: 'Commonwealth School',
+      image: '/assets/commonwalthsite.png',
+      description:
+        'Website for Commonwealth Preschool of Abidjan, a school inspired by Finnish pedagogy. Beyond the public site, the project includes a parent space to follow schooling, registrations, and communication with the school, plus an administration space for staff to manage classes, records, and day-to-day operations.',
+      actions: [{ label: 'Visit the website', to: 'https://www.commonwealth-school.com/' }],
+    },
+    {
       title: 'The Lightbulb Agency',
       image: '/assets/lightbulbsite.png',
       description:
@@ -200,42 +214,8 @@ const translations = {
 
 const projects = computed(() => projectsByLocale[locale.value])
 const t = computed(() => translations[locale.value])
-
-const headerSectionRef = ref<HTMLElement | null>(null)
-const headerVisible = ref(false)
-const cardsSectionRef = ref<HTMLElement | null>(null)
-const cardsVisible = ref(false)
-
-onMounted(() => {
-  const headerEl = headerSectionRef.value
-  if (headerEl) {
-    const headerObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          headerVisible.value = entry.isIntersecting
-        })
-      },
-      { threshold: 0.2 }
-    )
-    headerObserver.observe(headerEl)
-    onUnmounted(() => headerObserver.disconnect())
-  }
-
-  const el = cardsSectionRef.value
-  if (!el) return
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        cardsVisible.value = entry.isIntersecting
-      })
-    },
-    { threshold: 0.2 }
-  )
-
-  observer.observe(el)
-  onUnmounted(() => observer.disconnect())
-})
+const { el: headerSectionRef, visible: headerVisible } = useOnceReveal({ threshold: 0.2 })
+const { el: cardsSectionRef, visible: cardsVisible } = useOnceReveal({ threshold: 0.2 })
 
 const seoByLocale = {
   fr: {
