@@ -127,7 +127,7 @@ type Member = {
   role: string
   bio: string
   bioFull: string[]
-  /** Photo dédiée (ex. `/assets/aminata.png`), sinon sprite partagé. */
+  /** Photo dédiée (ex. `/assets/aminata.jpeg`), sinon sprite partagé. */
   avatarSrc?: string
 }
 
@@ -137,7 +137,7 @@ const membersByLocale: Record<'fr' | 'en', Member[]> = {
       nameKey: 'aminata',
       name: 'Aminata Sow',
       role: 'CEO - CTO',
-      avatarSrc: '/assets/aminata.png',
+      avatarSrc: '/assets/aminata.jpeg',
       bio: "Co‑fondatrice et développeuse, je crée des solutions digitales performantes qui transforment les idées en applications concrètes, en alliant expertise technique et vision stratégique.",
       bioFull: [
         'En tant que co‑fondatrice et développeuse principale, je conçois et développe des solutions digitales qui transforment les idées en applications performantes et concrètes.',
@@ -177,7 +177,7 @@ const membersByLocale: Record<'fr' | 'en', Member[]> = {
       nameKey: 'aminata',
       name: 'Aminata Sow',
       role: 'CEO - CTO',
-      avatarSrc: '/assets/aminata.png',
+      avatarSrc: '/assets/aminata.jpeg',
       bio: 'Co-founder and developer: I deliver high-performing digital solutions that turn ideas into real applications, combining technical depth with strategic direction.',
       bioFull: [
         'As co-founder and lead developer, I design and build digital solutions that turn ideas into robust, concrete applications.',
