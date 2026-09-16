@@ -52,7 +52,7 @@ const props = withDefaults(
       { label: 'AI', size: 'xl' },
       { label: 'Conception de\nsolutions digitales', size: 'xl' },
       { label: 'Formation', size: 'lg' },
-      { label: 'Audit & Conseils', size: 'md' },
+      // { label: 'Audit & Conseils', size: 'md' },
       { label: 'Développement &\ninfrastructure', size: 'md' },
     ],
   }
@@ -84,14 +84,14 @@ const translatedLabels = {
     'AI': 'AI',
     'Conception de\nsolutions digitales': 'Conception de\nsolutions digitales',
     'Formation': 'Formation',
-    'Audit & Conseils': 'Audit & Conseils',
+    // 'Audit & Conseils': 'Audit & Conseils',
     'Développement &\ninfrastructure': 'Developpement &\ninfrastructure',
   },
   en: {
     'AI': 'AI',
     'Conception de\nsolutions digitales': 'Digital solution\ndesign',
     'Formation': 'Training',
-    'Audit & Conseils': 'Audit & Consulting',
+    // 'Audit & Conseils': 'Audit & Consulting',
     'Développement &\ninfrastructure': 'Development &\ninfrastructure',
   },
 } as const

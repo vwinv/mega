@@ -285,18 +285,18 @@ const content = {
     projectDescriptionLabel: 'Description du projet',
     projectDescriptionPlaceholder: 'Décrivez votre projet...',
     services: [
-      {
-        title: 'Audit & Conseils',
-        image: '/assets/audit.png',
-        description: 'Nous aidons les entreprises a renforcer leur gouvernance IT et leur securite.',
-        points: [
-          'Audit des processus metiers',
-          "Audit securite des systemes d'information",
-          'Audit securite des plateformes web et mobiles',
-          'Analyse des vulnerabilites',
-          'Mise en place de politique securite',
-        ],
-      },
+      // {
+      //   title: 'Audit & Conseils',
+      //   image: '/assets/audit.png',
+      //   description: 'Nous aidons les entreprises a renforcer leur gouvernance IT et leur securite.',
+      //   points: [
+      //     'Audit des processus metiers',
+      //     "Audit securite des systemes d'information",
+      //     'Audit securite des plateformes web et mobiles',
+      //     'Analyse des vulnerabilites',
+      //     'Mise en place de politique securite',
+      //   ],
+      // },
       {
         title: 'Formation',
         image: '/assets/formation.png',
@@ -348,18 +348,18 @@ const content = {
     projectDescriptionLabel: 'Project description',
     projectDescriptionPlaceholder: 'Describe your project...',
     services: [
-      {
-        title: 'Audit & Consulting',
-        image: '/assets/audit.png',
-        description: 'We help companies strengthen their IT governance and security.',
-        points: [
-          'Business process audit',
-          'Information systems security audit',
-          'Web and mobile platform security audit',
-          'Vulnerability analysis',
-          'Security policy implementation',
-        ],
-      },
+      // {
+      //   title: 'Audit & Consulting',
+      //   image: '/assets/audit.png',
+      //   description: 'We help companies strengthen their IT governance and security.',
+      //   points: [
+      //     'Business process audit',
+      //     'Information systems security audit',
+      //     'Web and mobile platform security audit',
+      //     'Vulnerability analysis',
+      //     'Security policy implementation',
+      //   ],
+      // },
       {
         title: 'Training',
         image: '/assets/formation.png',
