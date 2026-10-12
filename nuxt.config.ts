@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://mega-sn.com',
+      statExpertises: process.env.NUXT_PUBLIC_STAT_EXPERTISES || '03',
+      statProjets: process.env.NUXT_PUBLIC_STAT_PROJETS || '07',
+      statSolutions: process.env.NUXT_PUBLIC_STAT_SOLUTIONS || '03',
     },
   },
   site: {
@@ -22,6 +25,12 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#d84c4c' },
       ],
       link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap',
+        },
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/png', href: '/icon-48.png', sizes: '48x48' },

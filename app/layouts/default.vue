@@ -1,7 +1,7 @@
 <template>
-  <div class="layout">
+  <div class="layout" :class="isHome && 'layout--home'">
     <AppHeader />
-    <main class="main">
+    <main class="main" :class="isHome && 'main--home'">
       <slot />
     </main>
     <AppFooter />
@@ -9,6 +9,56 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
+const isHome = computed(() => route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/contact' || route.path === '/services' || route.path.startsWith('/services/'))
+
+let revealObserver: IntersectionObserver | null = null
+let revealMutations: MutationObserver | null = null
+let revealFrame = 0
+
+function bindReveals(root: ParentNode) {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  root.querySelectorAll<HTMLElement>('.reveal:not([data-reveal]), .reveal-in:not([data-reveal])').forEach((node) => {
+    node.dataset.reveal = '1'
+    if (reduce || !revealObserver) {
+      node.classList.add('is-in')
+      return
+    }
+    revealObserver.observe(node)
+  })
+}
+
+function scheduleReveals() {
+  if (revealFrame) return
+  revealFrame = requestAnimationFrame(() => {
+    revealFrame = 0
+    bindReveals(document)
+  })
+}
+
+onMounted(() => {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          entry.target.classList.add('is-in')
+          revealObserver?.unobserve(entry.target)
+        }
+      },
+      { threshold: 0 },
+    )
+  }
+  scheduleReveals()
+  revealMutations = new MutationObserver(() => scheduleReveals())
+  revealMutations.observe(document.body, { childList: true, subtree: true })
+})
+
+onUnmounted(() => {
+  revealObserver?.disconnect()
+  revealMutations?.disconnect()
+  if (revealFrame) cancelAnimationFrame(revealFrame)
+})
 const config = useRuntimeConfig()
 const siteUrl = String(config.public.siteUrl || 'https://mega-sn.com').replace(/\/$/, '')
 
@@ -44,11 +94,33 @@ useHead({
   flex-direction: column;
 }
 
+.layout--home {
+  background: #f3f1ef;
+}
+
 .main {
   flex: 1;
   width: 100%;
   max-width: 72rem;
   margin-inline: auto;
-  padding: 2rem 1.5rem 0;
+  padding: 2rem 1.75rem 0;
+}
+
+@media (min-width: 640px) {
+  .main {
+    padding-inline: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main {
+    padding-inline: 3.5rem;
+  }
+}
+
+.main--home {
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 </style>

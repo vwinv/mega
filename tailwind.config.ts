@@ -7,6 +7,9 @@ export default {
       colors: {
         brand: '#d84c4c',
       },
+      fontFamily: {
+        sans: ['Poppins', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Ubuntu', 'sans-serif'],
+      },
       keyframes: {
         'zoom-dezoom': {
           '0%, 100%': { transform: 'scale(1)' },

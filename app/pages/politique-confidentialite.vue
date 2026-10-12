@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="reveal">
     <h1 class="text-2xl font-bold text-neutral-900">Politique de confidentialité</h1>
     <p class="mt-4 text-neutral-600">Contenu à venir.</p>
   </div>
