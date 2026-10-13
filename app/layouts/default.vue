@@ -1,5 +1,5 @@
 <template>
-  <div class="layout" :class="isHome && 'layout--home'">
+  <div class="layout" :class="{ 'layout--home': isHome, 'layout--dark': isDarkHome }">
     <AppHeader />
     <main class="main" :class="isHome && 'main--home'">
       <slot />
@@ -10,7 +10,9 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const isHome = computed(() => route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/contact' || route.path === '/services' || route.path.startsWith('/services/'))
+const isDarkHome = computed(() => theme.value === 'dark' && (route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/services' || route.path.startsWith('/services/')))
 
 let revealObserver: IntersectionObserver | null = null
 let revealMutations: MutationObserver | null = null
@@ -96,6 +98,10 @@ useHead({
 
 .layout--home {
   background: #f3f1ef;
+}
+
+.layout--dark {
+  background: #070707;
 }
 
 .main {

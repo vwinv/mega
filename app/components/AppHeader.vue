@@ -1,5 +1,5 @@
 <template>
-  <div ref="barRef" class="fixed inset-x-0 top-0 z-50 bg-transparent px-3 pt-4 sm:px-5 lg:px-8" @mouseleave="servicesOpen = false">
+  <div ref="barRef" class="nav-band fixed inset-x-0 top-0 z-50 bg-transparent px-3 pt-4 sm:px-5 lg:px-8" :class="theme === 'dark' && 'is-dark'" @mouseleave="servicesOpen = false">
     <header class="mx-auto flex max-w-6xl items-center gap-2 rounded-full bg-[#161616] py-2 pl-4 pr-2 text-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] sm:gap-3 sm:pl-5">
       <NuxtLink to="/" class="mr-1 flex shrink-0 items-center no-underline" aria-label="MEGA">
         <img src="/assets/logo.png" alt="MEGA" class="header-logo h-5 w-auto min-[380px]:h-6 sm:h-7" />
@@ -99,11 +99,11 @@
             <li v-for="(item, i) in t.expertises" :key="item">
               <NuxtLink
                 to="/services"
-                class="flex items-center justify-between rounded-2xl border border-white/20 px-4 py-3 text-sm font-semibold text-white no-underline transition-colors hover:border-white/40 hover:bg-white/5"
+                class="mega-expertise flex items-center justify-between rounded-full border border-white/15 px-4 py-3 text-sm font-semibold text-white no-underline"
                 @click="servicesOpen = false"
               >
-                <span><span class="mr-3 text-white/40">0{{ i + 1 }}</span>{{ item }}</span>
-                <span aria-hidden="true">→</span>
+                <span><span class="mega-index mr-3 text-white/40">0{{ i + 1 }}</span>{{ item }}</span>
+                <span class="mega-arrow" aria-hidden="true">→</span>
               </NuxtLink>
             </li>
           </ul>
@@ -111,9 +111,9 @@
 
         <div class="px-3 py-2">
           <p class="text-[11px] font-medium text-white/45">{{ t.solutionsLabel }}</p>
-          <ul class="mt-4 space-y-4">
+          <ul class="mt-3 space-y-1">
             <li v-for="item in t.solutionItems" :key="item.title">
-              <NuxtLink to="/services#solutions" class="block text-white no-underline" @click="servicesOpen = false">
+              <NuxtLink to="/services#solutions" class="mega-solution block rounded-2xl px-3 py-2.5 text-white no-underline" @click="servicesOpen = false">
                 <span class="block text-sm font-bold">{{ item.title }}</span>
                 <span class="mt-1 block text-xs leading-5 text-white/55">{{ item.body }}</span>
               </NuxtLink>
@@ -270,6 +270,39 @@ watch(() => route.path, () => {
 </script>
 
 <style scoped>
+.nav-band :is(a, button):hover {
+  text-decoration: none;
+}
+
+.mega-expertise,
+.mega-solution {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.mega-expertise:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-band.is-dark .mega-index,
+.nav-band.is-dark .mega-arrow {
+  color: #e88986;
+}
+
+.nav-band.is-dark .mega-expertise:hover {
+  border-color: #e44545;
+  background: linear-gradient(90deg, rgba(92, 24, 28, 0.95), rgba(32, 12, 14, 0.92));
+}
+
+.nav-band.is-dark .mega-expertise:hover .mega-index,
+.nav-band.is-dark .mega-expertise:hover .mega-arrow {
+  color: #e44545;
+}
+
+.mega-solution:hover {
+  background: #2a2a2a;
+}
+
 .header-space {
   height: 4.25rem;
   background: #fff;

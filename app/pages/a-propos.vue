@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="about" :class="theme === 'dark' && 'is-dark'">
     <section class="about-hero px-6 pb-12 sm:px-10 lg:px-14">
       <p class="reveal flex w-fit items-center gap-2 rounded-full border border-[#f0d2d0] bg-white px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#e44545]">
         <span class="h-1.5 w-1.5 rounded-full bg-[#e44545]" aria-hidden="true"></span>
@@ -25,28 +25,31 @@
       </div>
     </section>
 
-    <section class="px-6 py-12 sm:px-10 lg:px-14">
-      <div class="reveal grid items-start gap-8 lg:grid-cols-2 lg:gap-16">
+    <section class="talk relative px-6 py-12 sm:px-10 lg:px-14">
+      <div class="talk-glow" aria-hidden="true"></div>
+      <div class="reveal relative grid items-start gap-8 lg:grid-cols-2 lg:gap-16">
         <h2 class="text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">{{ t.talkTitle }}</h2>
-        <div class="max-w-xl text-sm leading-7 text-[#6f6a67] sm:text-[15px]">
+        <div class="talk-copy max-w-xl text-sm leading-7 text-[#6f6a67] sm:text-[15px]">
           <p>{{ t.aboutP1 }}</p>
           <p class="mt-4">{{ t.aboutP2 }}</p>
           <p class="mt-4">{{ t.aboutP3 }}</p>
-          <p class="mt-6 rounded-2xl border border-[#e7b4b2] px-5 py-4 font-semibold text-[#111]">{{ t.aboutQuote }}</p>
+          <p class="about-quote mt-6 rounded-2xl border border-[#e7b4b2] px-5 py-4 font-semibold text-[#111]">{{ t.aboutQuote }}</p>
         </div>
       </div>
     </section>
 
     <section class="px-6 sm:px-10 lg:px-14">
-      <div class="reveal grid items-center gap-8 rounded-[1.8rem] bg-white px-6 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1.1fr_0.9fr]">
-        <div>
+      <div class="vision reveal grid items-stretch overflow-hidden rounded-[1.8rem] bg-white lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="vision-copy px-6 py-8 sm:px-10 sm:py-10">
           <h2 class="text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">
             {{ t.our }}
             <span class="ml-1 inline-block rounded-xl bg-[#e44545] px-3 py-1 text-white">{{ t.visionWord }}</span>
           </h2>
           <p class="mt-4 max-w-xl text-sm leading-7 text-[#6f6a67] sm:text-[15px]">{{ t.visionText }}</p>
         </div>
-        <img src="/assets/globe.svg" alt="" class="mx-auto h-56 w-auto sm:h-64" />
+        <div class="vision-art flex items-center justify-center px-6 py-8">
+          <img src="/assets/globe.svg" alt="" class="mx-auto h-56 w-auto sm:h-64" />
+        </div>
       </div>
     </section>
 
@@ -64,24 +67,24 @@
     </div>
 
     <section class="px-6 pb-6 sm:px-10 lg:px-14">
-      <h2 class="reveal text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">
+      <h2 class="values-title reveal text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">
         {{ t.our }}
         <span class="ml-1 inline-block rounded-xl bg-[#e44545] px-3 py-1 text-white">{{ t.valuesWord }}</span>
       </h2>
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
-        <article v-for="(item, i) in values" :key="item.title" class="reveal rounded-[1.6rem] bg-white p-5" :style="{ transitionDelay: `${i * 100}ms` }">
-          <div class="flex h-52 items-center justify-center">
+        <article v-for="(item, i) in values" :key="item.title" class="value-card reveal rounded-[1.6rem] bg-white p-5" :style="{ transitionDelay: `${i * 100}ms` }">
+          <div class="value-shot flex h-52 items-center justify-center">
             <img :src="item.image" alt="" class="max-h-full w-auto object-contain" />
           </div>
-          <p class="mt-2 text-[11px] font-bold tracking-[0.14em] text-[#e44545]">0{{ i + 1 }}</p>
+          <p class="mt-4 text-[11px] font-bold tracking-[0.14em] text-[#e44545]">0{{ i + 1 }}</p>
           <h3 class="mt-1 text-xl font-extrabold text-[#111]">{{ item.title }}</h3>
-          <p class="mt-2 text-sm leading-6 text-[#6f6a67]">{{ item.text }}</p>
+          <p class="value-text mt-2 text-sm leading-6 text-[#6f6a67]">{{ item.text }}</p>
         </article>
       </div>
     </section>
 
     <section class="px-6 py-8 sm:px-10 lg:px-14">
-      <div class="rounded-[1.75rem] bg-white px-6 py-8 sm:px-10 sm:py-9">
+      <div class="team-shell rounded-[1.75rem] bg-white px-6 py-8 sm:px-10 sm:py-9">
         <h2 class="reveal text-left text-[1.7rem] font-extrabold leading-none tracking-tight text-[#111] sm:text-[2rem]">
           {{ t.teamLead }}
           <span class="ml-2 inline-flex translate-y-[-0.08em] items-center rounded-lg bg-[#e44545] px-2.5 py-1 align-middle text-[0.62em] font-extrabold leading-none text-white">MEGA</span>
@@ -91,7 +94,7 @@
             v-for="(member, i) in team"
             :key="member.name"
             to="/a-propos"
-            class="reveal flex items-center gap-3 rounded-full bg-[#111] py-2 pl-2 pr-5 text-white no-underline"
+            class="team-pill reveal flex items-center gap-3 rounded-full bg-[#111] py-2 pl-2 pr-5 text-white no-underline"
             :style="{ transitionDelay: `${120 + i * 140}ms` }"
           >
             <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e44545] text-[11px] font-extrabold tracking-wide">
@@ -112,7 +115,7 @@
         <div class="reveal pb-14 lg:pb-20">
           <h2 class="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#111] sm:text-5xl lg:text-[3.35rem]">{{ t.ctaTitle }}</h2>
           <p class="mt-4 text-sm text-[#9a9592] sm:text-[15px]">{{ t.ctaBody }}</p>
-          <form class="mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
+          <form class="cta-form mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
             <label class="sr-only" for="about-email">{{ t.email }}</label>
             <input
               id="about-email"
@@ -139,6 +142,7 @@
 
 <script setup lang="ts">
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
+const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const email = ref('')
 const router = useRouter()
 
@@ -239,6 +243,104 @@ usePageSeo({
 </script>
 
 <style scoped>
+.about {
+  overflow-x: clip;
+}
+
+.about.is-dark {
+  background: #070707;
+  color: #f7f7f7;
+}
+
+.talk-glow {
+  display: none;
+}
+
+.about.is-dark .talk-glow {
+  display: block;
+  position: absolute;
+  left: 4%;
+  top: 42%;
+  width: 32rem;
+  height: 24rem;
+  transform: translateY(-50%);
+  background: radial-gradient(ellipse at center, rgba(150, 18, 24, 0.72) 0%, rgba(90, 10, 14, 0.28) 46%, rgba(7, 7, 7, 0) 72%);
+  pointer-events: none;
+}
+
+.about.is-dark .talk h2,
+.about.is-dark .vision h2,
+.about.is-dark .marquee span,
+.about.is-dark .values-title,
+.about.is-dark .team-shell h2,
+.about.is-dark .cta h2 {
+  color: #fff;
+}
+
+.about.is-dark .talk-copy {
+  color: #e4e0dd;
+}
+
+.about.is-dark .about-quote {
+  border-color: #e44545;
+  background: transparent;
+  color: #fff;
+}
+
+.about.is-dark .vision {
+  background: #141414;
+}
+
+.about.is-dark .vision-copy p {
+  color: #c8c3c0;
+}
+
+.about.is-dark .vision-art {
+  background: #fff;
+}
+
+.about.is-dark .value-card {
+  border: 1px solid #2a2a2a;
+  background: #141414;
+}
+
+.about.is-dark .value-shot {
+  border-radius: 1.2rem;
+  background: #fff;
+}
+
+.about.is-dark .value-card h3 {
+  color: #fff;
+}
+
+.about.is-dark .value-text {
+  color: #a8a3a0;
+}
+
+.about.is-dark .team-shell {
+  border: 1px solid #2a2a2a;
+  background: #141414;
+}
+
+.about.is-dark .team-pill {
+  background: #fff;
+  color: #111;
+}
+
+.about.is-dark .cta-glow {
+  background: radial-gradient(ellipse at center, rgba(176, 24, 28, 0.85) 0%, rgba(110, 12, 16, 0.42) 40%, rgba(7, 7, 7, 0) 72%);
+}
+
+.about.is-dark .cta-form {
+  border-color: #2a2a2a;
+  background: #101010;
+  box-shadow: none;
+}
+
+.about.is-dark .cta-form input {
+  color: #fff;
+}
+
 .about-hero {
   margin-top: -4.25rem;
   padding-top: 7.5rem;

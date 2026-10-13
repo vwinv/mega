@@ -1,5 +1,5 @@
 <template>
-  <div class="projects">
+  <div class="projects" :class="theme === 'dark' && 'is-dark'">
     <section class="projects-hero px-6 pb-12 sm:px-10 lg:px-14">
       <p class="reveal flex w-fit items-center gap-2 rounded-full border border-[#f0d2d0] bg-white px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#e44545]">
         <span class="h-1.5 w-1.5 rounded-full bg-[#e44545]" aria-hidden="true"></span>
@@ -25,20 +25,21 @@
       </div>
     </section>
 
-    <section class="px-6 py-10 sm:px-10 lg:px-14">
-      <div class="space-y-4">
+    <section class="projects-list relative px-6 py-10 sm:px-10 lg:px-14">
+      <div class="projects-glow" aria-hidden="true"></div>
+      <div class="relative space-y-4">
         <article v-for="(project, i) in projects" :key="project.title" class="work-card reveal rounded-[1.7rem] bg-white p-4 sm:p-5" :style="{ transitionDelay: `${(i % 2) * 90}ms` }">
           <div class="grid items-center gap-5 md:grid-cols-[minmax(0,17rem)_1fr] md:gap-8">
             <div class="flex h-48 items-center justify-center rounded-[1.3rem] bg-[#f6f1ee] p-5 sm:h-52">
               <img :src="project.image" :alt="project.title" class="max-h-full max-w-full object-contain" loading="lazy" />
             </div>
             <div class="px-1 py-1 md:py-3 md:pr-4">
-              <p class="flex items-center gap-2.5 text-[11px] font-bold tracking-[0.16em] text-[#e44545]">
+              <p class="work-kind flex items-center gap-2.5 text-[11px] font-bold tracking-[0.16em] text-[#e44545]">
                 <span class="rounded-md bg-[#e44545] px-1.5 py-0.5 text-[10px] font-extrabold tracking-normal text-white">{{ String(i + 1).padStart(2, '0') }}</span>
                 {{ project.kind === 'app' ? t.kindApp : t.kindSite }}
               </p>
               <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-[#111]">{{ project.title }}</h2>
-              <p class="mt-3 max-w-3xl text-sm leading-7 text-[#5e5956]">{{ project.description }}</p>
+              <p class="work-body mt-3 max-w-3xl text-sm leading-7 text-[#5e5956]">{{ project.description }}</p>
               <div class="mt-5 flex flex-wrap gap-2">
                 <a
                   v-for="link in project.links"
@@ -63,7 +64,7 @@
         <div class="reveal pb-14 lg:pb-20">
           <h2 class="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#111] sm:text-5xl lg:text-[3.35rem]">{{ t.ctaTitle }}</h2>
           <p class="mt-4 text-sm text-[#9a9592] sm:text-[15px]">{{ t.ctaBody }}</p>
-          <form class="mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
+          <form class="cta-form mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
             <label class="sr-only" for="projects-email">{{ t.email }}</label>
             <input
               id="projects-email"
@@ -90,6 +91,7 @@
 
 <script setup lang="ts">
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
+const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const email = ref('')
 const router = useRouter()
 
@@ -318,6 +320,71 @@ usePageSeo({
 .work-card:hover {
   border-color: #e44545;
   box-shadow: 0 12px 32px rgba(228, 69, 69, 0.08);
+}
+
+.projects {
+  overflow-x: clip;
+}
+
+.projects.is-dark {
+  background: #070707;
+  color: #f7f7f7;
+}
+
+.projects-glow {
+  display: none;
+}
+
+.projects.is-dark .projects-glow {
+  display: block;
+  position: absolute;
+  right: -4rem;
+  top: 16rem;
+  width: 34rem;
+  height: 26rem;
+  background: radial-gradient(ellipse at center, rgba(140, 18, 22, 0.5) 0%, rgba(90, 10, 14, 0.22) 46%, rgba(7, 7, 7, 0) 72%);
+  pointer-events: none;
+}
+
+.projects.is-dark .work-card {
+  border-color: #2a2a2a;
+  background: #141414;
+  box-shadow: none;
+}
+
+.projects.is-dark .work-card:hover {
+  border-color: #e44545;
+  box-shadow: 0 0 42px rgba(228, 69, 69, 0.16);
+}
+
+.projects.is-dark .work-card h2 {
+  color: #fff;
+}
+
+.projects.is-dark .work-kind {
+  color: #c8c3c0;
+}
+
+.projects.is-dark .work-body {
+  color: #a8a3a0;
+}
+
+.projects.is-dark .cta h2 {
+  color: #fff;
+}
+
+.projects.is-dark .cta-glow {
+  background: radial-gradient(ellipse at center, rgba(176, 24, 28, 0.85) 0%, rgba(110, 12, 16, 0.42) 40%, rgba(7, 7, 7, 0) 72%);
+}
+
+.projects.is-dark .cta-form {
+  border-color: #2a2a2a;
+  background: #101010;
+  box-shadow: none;
+}
+
+.projects.is-dark .cta-form input {
+  color: #fff;
 }
 
 .cta-glow {

@@ -1,5 +1,5 @@
 <template>
-  <div class="service-page">
+  <div class="service-page" :class="theme === 'dark' && 'is-dark'">
     <section class="service-hero px-6 pb-16 pt-8 sm:px-10 lg:px-14">
       <NuxtLink to="/services" class="reveal inline-flex items-center gap-2 text-sm font-semibold text-[#e44545] no-underline hover:brightness-110">
         <span aria-hidden="true">←</span>
@@ -30,7 +30,7 @@
           <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-[#111] sm:text-4xl">{{ t.what }}</h2>
         </div>
         <ul class="rise space-y-3" style="transition-delay: 120ms">
-          <li v-for="(item, i) in t.tasks" :key="item" class="flex items-center gap-4 rounded-full bg-white px-5 py-4 text-sm font-semibold text-[#111] shadow-[0_8px_24px_rgba(0,0,0,0.04)]">
+          <li v-for="(item, i) in t.tasks" :key="item" class="work-item flex items-center gap-4 rounded-full bg-white px-5 py-4 text-sm font-semibold text-[#111] shadow-[0_8px_24px_rgba(0,0,0,0.04)]">
             <span class="text-[#b0aaa6]">0{{ i + 1 }}</span>
             {{ item }}
           </li>
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <section ref="approachRef" class="px-6 py-12 sm:px-10 lg:px-14" :class="approachVisible && 'is-in'">
+    <section ref="approachRef" class="approach px-6 py-12 sm:px-10 lg:px-14" :class="approachVisible && 'is-in'">
       <h2 class="rise text-3xl font-extrabold tracking-tight text-[#111] sm:text-4xl">{{ t.approach }}</h2>
       <div class="mt-8 grid gap-4 lg:grid-cols-3">
         <article
@@ -74,7 +74,7 @@
             v-for="item in t.otherItems"
             :key="item"
             to="/services"
-            class="inline-flex items-center rounded-full border border-[#e6e1de] bg-white px-4 py-2.5 text-sm font-semibold text-[#111] no-underline hover:border-[#e44545]"
+            class="other-link inline-flex items-center rounded-full border border-[#e6e1de] bg-white px-4 py-2.5 text-sm font-semibold text-[#111] no-underline hover:border-[#e44545]"
           >
             {{ item }}
           </NuxtLink>
@@ -88,7 +88,7 @@
         <div class="reveal pb-14 lg:pb-20">
           <h2 class="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#111] sm:text-5xl lg:text-[3.35rem]">{{ t.ctaTitle }}</h2>
           <p class="mt-4 text-sm text-[#9a9592] sm:text-[15px]">{{ t.ctaBody }}</p>
-          <form class="mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
+          <form class="cta-form mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
             <label class="sr-only" for="service-email">{{ t.email }}</label>
             <input
               id="service-email"
@@ -115,6 +115,7 @@
 
 <script setup lang="ts">
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
+const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const email = ref('')
 const router = useRouter()
 const { el: workRef, visible: workVisible } = useOnceReveal({ threshold: 0.2 })

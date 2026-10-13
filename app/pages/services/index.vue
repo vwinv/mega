@@ -1,5 +1,5 @@
 <template>
-  <div class="hub">
+  <div class="hub" :class="theme === 'dark' && 'is-dark'">
     <section class="hub-hero px-6 pb-16 sm:px-10 lg:px-14">
       <p class="reveal flex w-fit items-center gap-2 rounded-full border border-[#f0d2d0] bg-white px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#e44545]">
         <span class="h-1.5 w-1.5 rounded-full bg-[#e44545]" aria-hidden="true"></span>
@@ -20,17 +20,17 @@
 
     <section class="px-6 py-8 sm:px-10 lg:px-14">
       <div class="grid gap-5 lg:grid-cols-3">
-        <article v-for="(item, i) in t.expertises" :key="item.title" class="reveal flex flex-col rounded-[1.7rem] bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.04)] sm:p-7" :style="{ transitionDelay: `${i * 120}ms` }">
+        <article v-for="(item, i) in t.expertises" :key="item.title" class="expertise-card reveal flex flex-col rounded-[1.7rem] bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.04)] sm:p-7" :style="{ transitionDelay: `${i * 120}ms` }">
           <div class="flex items-start justify-between">
             <p class="text-4xl font-extrabold tracking-tight text-[#e44545]">{{ item.num }}</p>
-            <NuxtLink :to="item.to" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#ece7e4] text-lg leading-none text-[#111] no-underline hover:border-[#e44545]" :aria-label="t.more">
+            <NuxtLink :to="item.to" class="expertise-plus inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#ece7e4] text-lg leading-none text-[#111] no-underline hover:border-[#e44545]" :aria-label="t.more">
               +
             </NuxtLink>
           </div>
           <h2 class="mt-8 whitespace-pre-line text-[1.65rem] font-extrabold leading-tight tracking-tight text-[#111]">{{ item.title }}</h2>
-          <p class="mt-3 text-sm leading-6 text-[#6f6a67]">{{ item.lead }}</p>
+          <p class="expertise-lead mt-3 text-sm leading-6 text-[#6f6a67]">{{ item.lead }}</p>
           <ul class="mt-5 flex flex-wrap gap-2">
-            <li v-for="point in item.points" :key="point" class="rounded-full border border-[#ece7e4] px-3 py-1.5 text-xs font-medium text-[#3a3a3a]">
+            <li v-for="point in item.points" :key="point" class="expertise-tag rounded-full border border-[#ece7e4] px-3 py-1.5 text-xs font-medium text-[#3a3a3a]">
               {{ point }}
             </li>
           </ul>
@@ -38,7 +38,7 @@
             <NuxtLink :to="item.to" class="inline-flex items-center rounded-full bg-[#e44545] px-4 py-2.5 text-sm font-semibold text-white no-underline hover:brightness-110">
               {{ t.more }}
             </NuxtLink>
-            <NuxtLink to="/contact" class="inline-flex items-center rounded-full border border-[#ece7e4] bg-white px-4 py-2.5 text-sm font-semibold text-[#111] no-underline hover:border-[#e44545]">
+            <NuxtLink to="/contact" class="expertise-quote inline-flex items-center rounded-full border border-[#ece7e4] bg-white px-4 py-2.5 text-sm font-semibold text-[#111] no-underline hover:border-[#e44545]">
               {{ t.quoteShort }}
             </NuxtLink>
           </div>
@@ -48,16 +48,16 @@
 
     <section id="solutions" class="solutions-wrap px-6 pb-6 pt-10 sm:px-10 lg:px-14">
       <div class="solutions-glow" aria-hidden="true"></div>
-      <div class="relative rounded-[2rem] bg-white px-6 py-10 shadow-[0_16px_50px_rgba(0,0,0,0.04)] sm:px-10 sm:py-12">
+      <div class="solutions-panel relative rounded-[2rem] bg-white px-6 py-10 shadow-[0_16px_50px_rgba(0,0,0,0.04)] sm:px-10 sm:py-12">
         <h2 class="reveal text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">
           {{ t.our }}
           <span class="ml-2 inline-block rounded-xl bg-[#e44545] px-3 py-1 text-white">{{ t.solutionsWord }}</span>
         </h2>
-        <p class="reveal mt-4 max-w-xl text-sm leading-6 text-[#8a8582]" style="transition-delay: 80ms">{{ t.solutionsLead }}</p>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2">
-          <article v-for="(item, i) in t.solutions" :key="item.title" class="reveal flex flex-col rounded-[1.4rem] bg-[#111] p-6 text-white" :style="{ transitionDelay: `${i * 90}ms` }">
+        <p class="solutions-lead reveal mt-4 max-w-xl text-sm leading-6 text-[#8a8582]" style="transition-delay: 80ms">{{ t.solutionsLead }}</p>
+        <div class="mt-8 grid gap-4 lg:grid-cols-3">
+          <article v-for="(item, i) in t.solutions" :key="item.title" class="solution-card reveal flex flex-col rounded-[1.4rem] bg-[#111] p-6 text-white" :style="{ transitionDelay: `${i * 90}ms` }">
             <h3 class="text-2xl font-extrabold">{{ item.title }}</h3>
-            <p class="mt-3 text-sm leading-6 text-white/70">{{ item.body }}</p>
+            <p class="solution-body mt-3 text-sm leading-6 text-white/70">{{ item.body }}</p>
             <div class="mt-auto flex flex-wrap gap-2 pt-8">
               <NuxtLink to="/nos-solutions" class="inline-flex w-fit items-center rounded-full bg-[#e44545] px-4 py-2 text-sm font-semibold text-white no-underline hover:brightness-110">
                 {{ t.demo }}
@@ -67,7 +67,7 @@
                 :href="item.site"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex w-fit items-center rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white no-underline hover:border-white"
+                class="solution-visit inline-flex w-fit items-center rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white no-underline hover:border-white"
               >
                 {{ t.visit }}
               </a>
@@ -83,7 +83,7 @@
         <div class="reveal pb-14 lg:pb-20">
           <h2 class="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#111] sm:text-5xl lg:text-[3.35rem]">{{ t.ctaTitle }}</h2>
           <p class="mt-4 text-sm text-[#9a9592] sm:text-[15px]">{{ t.ctaBody }}</p>
-          <form class="mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
+          <form class="cta-form mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
             <label class="sr-only" for="hub-email">{{ t.email }}</label>
             <input
               id="hub-email"
@@ -110,6 +110,7 @@
 
 <script setup lang="ts">
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
+const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const email = ref('')
 const router = useRouter()
 

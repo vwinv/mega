@@ -102,3 +102,144 @@ img[src*="/assets/cta-mail.svg"] {
     animation: none;
   }
 }
+
+.layout--dark .service-page.is-dark,
+.layout--dark .hub.is-dark {
+  background: #070707;
+  color: #f7f7f7;
+}
+
+.service-page.is-dark .work h2,
+.service-page.is-dark .approach h2,
+.service-page.is-dark .marquee span,
+.service-page.is-dark .cta h2,
+.hub.is-dark .cta h2 {
+  color: #fff;
+}
+
+.service-page.is-dark .work-glow,
+.service-page.is-dark .cta-glow,
+.hub.is-dark .cta-glow {
+  background: radial-gradient(ellipse at center, rgba(176, 24, 28, 0.85) 0%, rgba(110, 12, 16, 0.4) 42%, rgba(7, 7, 7, 0) 72%);
+}
+
+.service-page.is-dark .work-item {
+  border: 1px solid #2a2a2a;
+  background: #161616;
+  color: #f7f7f7;
+  box-shadow: none;
+}
+
+.service-page.is-dark .work-item span {
+  color: #8a8582;
+}
+
+.service-page.is-dark .approach article:first-child {
+  border: 1px solid #2c2c2c;
+  background: #161616;
+  color: #fff;
+}
+
+.service-page.is-dark .approach article:first-child p:first-child {
+  color: #8a8582;
+}
+
+.service-page.is-dark .approach article:first-child h3 {
+  color: #fff;
+}
+
+.service-page.is-dark .approach article:first-child p:last-child {
+  color: #c8c3c0;
+}
+
+.service-page.is-dark .other-link {
+  border-color: #3a3a3a;
+  background: transparent;
+  color: #f7f7f7;
+}
+
+.service-page.is-dark .other-link:hover {
+  border-color: #e44545;
+}
+
+.service-page.is-dark .cta-form,
+.hub.is-dark .cta-form {
+  border-color: #2a2a2a;
+  background: #101010;
+  box-shadow: none;
+}
+
+.service-page.is-dark .cta-form input,
+.hub.is-dark .cta-form input {
+  color: #fff;
+}
+
+.hub.is-dark .expertise-card {
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  box-shadow: none;
+}
+
+.hub.is-dark .expertise-card h2 {
+  color: #fff;
+}
+
+.hub.is-dark .expertise-lead {
+  color: #a8a3a0;
+}
+
+.hub.is-dark .expertise-tag {
+  border-color: #3a3a3a;
+  color: #d9d4d0;
+}
+
+.hub.is-dark .expertise-plus {
+  border-color: #3a3a3a;
+  background: #1c1c1c;
+  color: #fff;
+}
+
+.hub.is-dark .expertise-quote {
+  border-color: #3a3a3a;
+  background: transparent;
+  color: #fff;
+}
+
+.hub.is-dark .solutions-panel {
+  border: 1px solid #242424;
+  background: #121212;
+  box-shadow: none;
+}
+
+.hub.is-dark .solutions-panel h2,
+.hub.is-dark .solution-card h3 {
+  color: #111;
+}
+
+.hub.is-dark .solutions-panel h2 {
+  color: #fff;
+}
+
+.hub.is-dark .solutions-lead {
+  color: #a8a3a0;
+}
+
+.hub.is-dark .solutions-glow {
+  top: 30%;
+  height: 18rem;
+  background: radial-gradient(ellipse at center, rgba(176, 24, 28, 0.55) 0%, rgba(7, 7, 7, 0) 72%);
+}
+
+.hub.is-dark .solution-card {
+  background: #fff;
+  color: #111;
+}
+
+.hub.is-dark .solution-body {
+  color: #6f6a67;
+}
+
+.hub.is-dark .solution-visit {
+  border-color: #e6e1de;
+  color: #111;
+}

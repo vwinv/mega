@@ -47,7 +47,7 @@
         </div>
 
         <div class="hero-rise hero-rise-5 text-left lg:pt-10 lg:text-right">
-          <p class="text-[11px] font-semibold tracking-[0.16em] text-[#e44545]">IA - DIGITAL - CODING</p>
+          <p class="text-[11px] font-semibold tracking-[0.16em] text-[#e44545]">IA · DATA · CLOUD</p>
           <p class="mt-2 text-xl font-extrabold leading-tight tracking-tight text-[var(--ink)] sm:text-2xl">
             {{ t.vision }}
           </p>
@@ -57,7 +57,7 @@
     </section>
 
     <section class="relative z-[1] px-6 pt-10 sm:px-10 lg:px-14">
-      <div class="mx-auto grid grid-cols-3 gap-2 rounded-[1.6rem] bg-[var(--card)] px-4 py-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] sm:px-8 sm:py-7">
+      <div class="stats-bar mx-auto grid grid-cols-3 gap-2 rounded-[1.6rem] bg-[var(--card)] px-4 py-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] sm:px-8 sm:py-7">
         <div v-for="(stat, i) in t.stats" :key="stat.label" class="reveal text-center" :style="{ transitionDelay: `${i * 110}ms` }">
           <p class="text-3xl font-extrabold tracking-tight text-[var(--ink)] sm:text-4xl">
             {{ stat.value }}<span class="text-[#e44545]">+</span>
@@ -77,15 +77,15 @@
       </div>
 
       <div class="mt-8 grid gap-4 md:grid-cols-2">
-        <article class="reveal relative min-h-[240px] overflow-hidden rounded-[1.6rem] bg-[var(--card)] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)]" style="transition-delay: 120ms">
+        <article class="talk-card reveal relative min-h-[240px] overflow-hidden rounded-[1.6rem] bg-[var(--card)] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)]" style="transition-delay: 120ms">
           <img src="/assets/loupe.svg" alt="" class="mx-auto h-52 w-auto object-contain" />
           <span class="absolute bottom-5 left-5 rounded-full bg-[#e44545] px-3 py-1.5 text-xs font-semibold text-white">
             {{ t.vision }}
           </span>
         </article>
-        <article class="reveal relative min-h-[240px] overflow-hidden rounded-[1.6rem] bg-[var(--card)] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)]" style="transition-delay: 240ms">
+        <article class="talk-card reveal relative min-h-[240px] overflow-hidden rounded-[1.6rem] bg-[var(--card)] p-5 shadow-[0_10px_30px_rgba(0,0,0,0.03)]" style="transition-delay: 240ms">
           <img src="/assets/chat.svg" alt="" class="mx-auto h-52 w-auto object-contain" />
-          <NuxtLink to="/a-propos" class="absolute bottom-5 right-5 text-sm font-semibold text-[var(--ink)] no-underline hover:text-[#e44545]">
+          <NuxtLink to="/a-propos" class="talk-link absolute bottom-5 right-5 text-sm font-semibold text-[var(--ink)] no-underline hover:text-[#e44545]">
             {{ t.discover }}
           </NuxtLink>
         </article>
@@ -122,7 +122,7 @@
         </div>
 
         <div class="flex flex-col gap-4">
-          <div class="reveal-in rounded-[1.4rem] bg-[var(--soft)] p-5" style="transition-delay: 80ms">
+          <div class="results-card reveal-in rounded-[1.4rem] bg-[var(--soft)] p-5" style="transition-delay: 80ms">
             <p class="text-sm leading-6 text-[var(--muted)]">{{ t.results }}</p>
             <NuxtLink to="/projet" class="mt-6 flex items-center justify-between text-lg font-extrabold text-[var(--ink)] no-underline">
               {{ t.seeWork }}
@@ -163,14 +163,14 @@
           {{ t.projectsLead }}
           <span class="ml-1 inline-block rounded-xl bg-[#e44545] px-2.5 py-0.5 text-white">{{ t.projectsWord }}</span>
         </h2>
-        <NuxtLink to="/projet" class="shrink-0 text-sm font-semibold text-[var(--muted)] no-underline hover:text-[var(--ink)]">
+        <NuxtLink to="/projet" class="all-projects shrink-0 text-sm font-semibold text-[var(--muted)] no-underline hover:text-[var(--ink)]">
           {{ t.allProjects }}
         </NuxtLink>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <article v-for="(project, i) in projects" :key="project.title" class="project-card reveal rounded-[1.5rem] bg-[var(--card)] p-3 shadow-[0_10px_30px_rgba(0,0,0,0.03)]" :style="{ transitionDelay: `${i * 120}ms` }">
-          <div class="flex h-40 items-center justify-center overflow-hidden rounded-2xl bg-[var(--soft)] p-3">
+          <div class="project-shot flex h-40 items-center justify-center overflow-hidden rounded-2xl bg-[var(--soft)] p-3">
             <img :src="project.image" :alt="project.title" class="max-h-full max-w-full object-contain" />
           </div>
           <div class="flex items-end justify-between gap-3 px-1 pb-1 pt-4">
@@ -193,7 +193,7 @@
     </section>
 
     <section class="mx-auto px-6 py-10 sm:px-10 lg:px-14">
-      <div class="rounded-[1.75rem] bg-[var(--card)] px-6 py-8 sm:px-10 sm:py-9">
+      <div class="team-shell rounded-[1.75rem] bg-[var(--card)] px-6 py-8 sm:px-10 sm:py-9">
         <h2 class="reveal text-left text-[1.7rem] font-extrabold leading-none tracking-tight text-[var(--ink)] sm:text-[2rem]">
           {{ t.teamLead }}
           <span class="ml-2 inline-flex translate-y-[-0.08em] items-center rounded-lg bg-[#e44545] px-2.5 py-1 align-middle text-[0.62em] font-extrabold leading-none text-white">MEGA</span>
@@ -203,7 +203,7 @@
             v-for="(member, i) in team"
             :key="member.name"
             to="/a-propos"
-            class="reveal flex items-center gap-3 rounded-full bg-[#111] py-2 pl-2 pr-5 text-white no-underline"
+            class="team-pill reveal flex items-center gap-3 rounded-full bg-[#111] py-2 pl-2 pr-5 text-white no-underline"
             :style="{ transitionDelay: `${120 + i * 140}ms` }"
           >
             <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e44545] text-[11px] font-extrabold tracking-wide">
@@ -224,7 +224,7 @@
         <div class="reveal pb-14 lg:pb-20">
           <h2 class="max-w-xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#111] sm:text-5xl lg:text-[3.35rem]">{{ t.ctaTitle }}</h2>
           <p class="mt-4 text-sm text-[#9a9592] sm:text-[15px]">{{ t.ctaBody }}</p>
-          <form class="mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
+          <form class="cta-form mt-7 flex max-w-md items-center rounded-full border border-[#ece7e4] bg-white p-1.5 shadow-[0_10px_30px_rgba(180,80,80,0.06)]" @submit.prevent="goContact">
             <label class="sr-only" for="home-email">{{ t.email }}</label>
             <input
               id="home-email"
@@ -314,7 +314,7 @@ const content = {
     seeWork: 'Voir nos réalisations',
     idea: 'Un projet en tête ?',
     talkExpert: 'Parler à un expert',
-    marquee: ['Comprendre', 'Orienter', 'Construire'],
+    marquee: ['Orienter', 'Construire', 'Comprendre'],
     projectsLead: 'Nos',
     projectsWord: 'Projets',
     allProjects: 'Tous les projets →',
@@ -355,7 +355,7 @@ const content = {
     seeWork: 'See our work',
     idea: 'A project in mind?',
     talkExpert: 'Talk to an expert',
-    marquee: ['Understand', 'Guide', 'Build'],
+    marquee: ['Guide', 'Build', 'Understand'],
     projectsLead: 'Our',
     projectsWord: 'Projects',
     allProjects: 'All projects →',
@@ -464,17 +464,125 @@ usePageSeo({
   background: #f3f1ef;
 }
 
+.home.is-dark {
+  --ink: #f7f7f7;
+  --muted: #a8a3a0;
+  --card: #141414;
+  --soft: #1c1c1c;
+  --line: #2e2e2e;
+  background: #070707;
+}
+
 .home.is-dark .band-rule {
   background: #2a2a2a;
 }
 
-.home.is-dark {
-  --ink: #f5f5f5;
-  --muted: #b9b4b0;
-  --card: #1c1c1c;
-  --soft: #262626;
-  --line: #333333;
+.home.is-dark .stats-bar {
+  border: 1px solid #2a2a2a;
   background: #121212;
+  box-shadow: none;
+}
+
+.home.is-dark .talk-card {
+  background: #fff;
+  box-shadow: none;
+}
+
+.home.is-dark .talk-link {
+  color: #111;
+}
+
+.home.is-dark .services-card {
+  border: 1px solid #242424;
+  background: #121212;
+  box-shadow: none;
+}
+
+.home.is-dark .service-row {
+  border-color: #3a3a3a;
+  background: transparent;
+  color: #f7f7f7;
+}
+
+.home.is-dark .service-row:hover {
+  border-color: #e44545;
+  background: transparent;
+  color: #fff;
+}
+
+.home.is-dark .code-float {
+  border-radius: 1.5rem;
+  background: #fff;
+  padding: 0.65rem;
+}
+
+.home.is-dark .code-glow {
+  bottom: -8%;
+  background: radial-gradient(ellipse at center, rgba(228, 69, 69, 0.75) 0%, rgba(228, 69, 69, 0.28) 46%, rgba(7, 7, 7, 0) 74%);
+}
+
+.home.is-dark .results-card {
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+}
+
+.home.is-dark .all-projects {
+  border: 1px solid #3a3a3a;
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  color: #f7f7f7;
+}
+
+.home.is-dark .all-projects:hover {
+  border-color: #e44545;
+  color: #fff;
+}
+
+.home.is-dark .project-card {
+  border-color: #242424;
+  background: #141414;
+  box-shadow: none;
+}
+
+.home.is-dark .project-shot {
+  background: #f4f1ef;
+}
+
+.home.is-dark .project-arrow {
+  border-color: #3a3a3a;
+  color: #f7f7f7;
+}
+
+.home.is-dark .team-shell {
+  border: 1px solid #242424;
+  background: #121212;
+}
+
+.home.is-dark .team-pill {
+  background: #fff;
+  color: #111;
+}
+
+.home.is-dark .cta {
+  background: transparent;
+}
+
+.home.is-dark .cta-glow {
+  background: radial-gradient(ellipse at center, rgba(176, 24, 28, 0.85) 0%, rgba(110, 12, 16, 0.42) 40%, rgba(7, 7, 7, 0) 72%);
+}
+
+.home.is-dark .cta h2 {
+  color: #fff;
+}
+
+.home.is-dark .cta-form {
+  border-color: #2a2a2a;
+  background: #101010;
+  box-shadow: none;
+}
+
+.home.is-dark .cta-form input {
+  color: #fff;
 }
 
 .cta {
