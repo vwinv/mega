@@ -58,10 +58,12 @@
           <article v-for="(item, i) in t.solutions" :key="item.title" class="solution-card reveal flex flex-col rounded-[1.4rem] bg-[#111] p-6 text-white" :style="{ transitionDelay: `${i * 90}ms` }">
             <h3 class="text-2xl font-extrabold">{{ item.title }}</h3>
             <p class="solution-body mt-3 text-sm leading-6 text-white/70">{{ item.body }}</p>
-            <div class="mt-auto flex flex-wrap gap-2 pt-8">
+            <div class="mt-auto flex flex-wrap gap-2 pt-8 empty:hidden">
+              <!--
               <NuxtLink to="/nos-solutions" class="inline-flex w-fit items-center rounded-full bg-[#e44545] px-4 py-2 text-sm font-semibold text-white no-underline hover:brightness-110">
                 {{ t.demo }}
               </NuxtLink>
+              -->
               <a
                 v-if="item.site"
                 :href="item.site"
