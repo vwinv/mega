@@ -67,6 +67,82 @@
       </div>
     </section>
 
+    <section class="news-band px-6 pt-10 sm:px-10 lg:px-14">
+      <div class="reveal flex items-center gap-3">
+        <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#e44545]" aria-hidden="true"></span>
+        <p class="text-[11px] font-bold tracking-[0.16em] text-[var(--ink)]">{{ t.newsLabel }}</p>
+        <span class="news-rule h-px min-w-0 flex-1 bg-[var(--line)]" aria-hidden="true"></span>
+      </div>
+
+      <article class="dropone-banner reveal mt-5 overflow-hidden rounded-[1.6rem] sm:rounded-[2rem]" style="transition-delay: 80ms">
+        <div class="grid items-center gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6 lg:px-10 lg:py-8">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex rounded-md bg-[#e44545] px-2.5 py-1 text-[11px] font-extrabold tracking-[0.08em] text-white">
+                {{ t.dropOne.badge }}
+              </span>
+              <span class="text-sm text-[#8a8582]">{{ t.dropOne.platform }}</span>
+            </div>
+
+            <h2 class="mt-5 text-4xl font-extrabold tracking-tight text-[#111] sm:text-5xl">
+              Drop One<span class="text-[#e44545]">.</span>
+            </h2>
+            <p class="mt-3 max-w-md text-lg font-bold leading-snug tracking-tight text-[#111] sm:text-xl">
+              {{ t.dropOne.headline }}
+            </p>
+            <p class="mt-4 max-w-md text-sm leading-7 text-[#6f6a67] sm:text-[15px]">
+              {{ t.dropOne.body }}
+            </p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a
+                href="https://www.dropone.pro/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-btn inline-flex items-center gap-3 rounded-xl bg-[#111] px-3.5 py-2.5 text-white no-underline hover:brightness-110"
+              >
+                <svg class="h-7 w-7 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16.7 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-.1 2.8-2.2.7-.9 1-1.9 1-1.9s-2-.8-2-.5.2-2.2-.2-3.9zm-2.1-6.1c.6-.8 1.1-1.8.9-2.9-1 .1-2.1.7-2.7 1.5-.6.7-1.1 1.8-.9 2.8 1 .1 2-.5 2.7-1.4z" />
+                </svg>
+                <span class="text-left leading-tight">
+                  <span class="block text-[10px] font-medium opacity-80">{{ t.dropOne.appStoreTop }}</span>
+                  <span class="block text-sm font-semibold">{{ t.dropOne.appStoreBottom }}</span>
+                </span>
+              </a>
+              <a
+                href="https://www.dropone.pro/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="store-btn inline-flex items-center gap-3 rounded-xl bg-[#111] px-3.5 py-2.5 text-white no-underline hover:brightness-110"
+              >
+                <svg class="h-7 w-7 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M3.6 2.9l9.4 9.1-9.4 9.1c-.5-.3-.8-.9-.8-1.5V4.4c0-.6.3-1.2.8-1.5zm11.2 10.8l2.5 2.5-3.5 2c-.2.1-.3.1-.5.1l4.5-2.6-3-2zm2.5-5.1l-2.5 2.5 3 2 1.5-.9c.7-.4 1.1-1 .9-1.7-.1-.4-.4-.7-.9-.9l-2-.9zm-4.3.4L3.6 2.9c.2-.1.4-.2.6-.2h.1l10.7 6.2-1.4 1.4z" />
+                </svg>
+                <span class="text-left leading-tight">
+                  <span class="block text-[10px] font-medium opacity-80">{{ t.dropOne.playTop }}</span>
+                  <span class="block text-sm font-semibold">{{ t.dropOne.playBottom }}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div class="dropone-visual relative mx-auto flex min-h-[22rem] w-full max-w-lg items-center justify-center lg:min-h-[26rem]">
+            <div class="dropone-glow" aria-hidden="true"></div>
+            <div class="dropone-ring dropone-ring--outer" aria-hidden="true"></div>
+            <div class="dropone-ring dropone-ring--inner" aria-hidden="true"></div>
+            <img
+              src="/assets/Banniere_dropone.png"
+              alt=""
+              class="dropone-shot relative z-[1] h-auto w-full max-h-[26rem] object-contain"
+              width="1640"
+              height="624"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+    </section>
+
     <section class="mx-auto px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
       <div class="reveal grid items-start gap-8 lg:grid-cols-2 lg:gap-16">
         <h2 class="text-4xl font-extrabold tracking-tight text-[var(--ink)] sm:text-5xl">{{ t.talkTitle }}</h2>
@@ -297,6 +373,17 @@ const content = {
       { label: 'Projets réalisés' },
       { label: 'Solutions' },
     ],
+    newsLabel: 'NOUVEAUTÉS MEGA',
+    dropOne: {
+      badge: 'NOUVEAU',
+      platform: 'Application mobile · iOS & Android',
+      headline: 'La révolution de la carte de visite est 100 % numérique.',
+      body: "Drop One remplace la carte de visite papier par une carte d'identité numérique. Créez votre carte en moins de 2 minutes, partagez-la par QR code et gardez vos coordonnées toujours à jour.",
+      appStoreTop: "Télécharger dans l'",
+      appStoreBottom: 'App Store',
+      playTop: 'Disponible sur',
+      playBottom: 'Google Play',
+    },
     talkTitle: 'Parlons de MEGA',
     talkBody: "MEGA est une entreprise innovante spécialisée dans la transformation digitale, avec l'ambition de devenir un acteur de référence en Afrique et à l'international.",
     talkQuote: 'Notre ambition : comprendre, orienter et construire des solutions qui créent de la valeur.',
@@ -338,6 +425,17 @@ const content = {
       { label: 'Projects delivered' },
       { label: 'Solutions' },
     ],
+    newsLabel: 'MEGA NEWS',
+    dropOne: {
+      badge: 'NEW',
+      platform: 'Mobile app · iOS & Android',
+      headline: 'The business card revolution is 100% digital.',
+      body: 'Drop One replaces paper business cards with a digital identity card. Create yours in under 2 minutes, share it with a QR code, and keep your details always up to date.',
+      appStoreTop: 'Download on the',
+      appStoreBottom: 'App Store',
+      playTop: 'Get it on',
+      playBottom: 'Google Play',
+    },
     talkTitle: 'Let’s talk about MEGA',
     talkBody: 'MEGA is an innovative company specialized in digital transformation, with the ambition to become a reference player in Africa and internationally.',
     talkQuote: 'Our ambition: understand, guide, and build solutions that create value.',
@@ -481,6 +579,55 @@ usePageSeo({
   border: 1px solid #2a2a2a;
   background: #121212;
   box-shadow: none;
+}
+
+.home.is-dark .news-rule {
+  background: #2a2a2a;
+}
+
+.dropone-banner {
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.home.is-dark .dropone-banner {
+  box-shadow: none;
+}
+
+.dropone-visual {
+  isolation: isolate;
+}
+
+.dropone-glow {
+  position: absolute;
+  inset: 18% 8%;
+  background: radial-gradient(ellipse at center, rgba(248, 180, 180, 0.7) 0%, rgba(248, 203, 203, 0.28) 42%, rgba(255, 255, 255, 0) 72%);
+  pointer-events: none;
+}
+
+.dropone-ring {
+  position: absolute;
+  border: 1.5px solid rgba(190, 182, 178, 0.55);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.dropone-ring--outer {
+  width: min(100%, 22rem);
+  height: min(100%, 22rem);
+}
+
+.dropone-ring--inner {
+  width: min(78%, 16.5rem);
+  height: min(78%, 16.5rem);
+}
+
+.dropone-shot {
+  filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.12));
+}
+
+.store-btn {
+  min-width: 10.5rem;
 }
 
 .home.is-dark .talk-card {

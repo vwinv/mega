@@ -59,11 +59,14 @@
             <h3 class="text-2xl font-extrabold">{{ item.title }}</h3>
             <p class="solution-body mt-3 text-sm leading-6 text-white/70">{{ item.body }}</p>
             <div class="mt-auto flex flex-wrap gap-2 pt-8 empty:hidden">
-              <!--
-              <NuxtLink to="/nos-solutions" class="inline-flex w-fit items-center rounded-full bg-[#e44545] px-4 py-2 text-sm font-semibold text-white no-underline hover:brightness-110">
+              <button
+                v-if="demosFor(item.title).length"
+                type="button"
+                class="inline-flex w-fit items-center rounded-full bg-[#e44545] px-4 py-2 text-sm font-semibold text-white hover:brightness-110"
+                @click="openDemo(item.title)"
+              >
                 {{ t.demo }}
-              </NuxtLink>
-              -->
+              </button>
               <a
                 v-if="item.site"
                 :href="item.site"
@@ -78,6 +81,81 @@
         </div>
       </div>
     </section>
+
+    <Teleport to="body">
+      <div
+        v-if="demoOpen"
+        class="demo-modal fixed inset-0 z-[80] flex items-center justify-center px-4 py-8"
+        :class="theme === 'dark' && 'is-dark'"
+        role="dialog"
+        aria-modal="true"
+        :aria-label="t.demoTitle"
+        @click.self="closeDemo"
+      >
+        <div class="demo-panel relative flex max-h-[min(92vh,52rem)] w-full max-w-[26rem] flex-col overflow-hidden rounded-[1.6rem] p-4 shadow-[0_24px_60px_rgba(0,0,0,0.28)] sm:max-w-[28rem] sm:p-5">
+          <div class="mb-4 flex shrink-0 items-start justify-between gap-4">
+            <div>
+              <p class="text-[11px] font-bold tracking-[0.16em] text-[#e44545]">{{ demoProduct }}</p>
+              <h2 class="mt-1 text-xl font-extrabold tracking-tight sm:text-2xl">{{ t.demoTitle }}</h2>
+            </div>
+            <button
+              type="button"
+              class="demo-close inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl leading-none"
+              :aria-label="t.close"
+              @click="closeDemo"
+            >
+              ×
+            </button>
+          </div>
+
+          <ul class="min-h-0 space-y-4 overflow-y-auto">
+            <li v-for="(demo, i) in activeDemos" :key="demo.src" class="demo-item overflow-hidden rounded-[1.25rem]">
+              <div
+                class="demo-stage relative mx-auto overflow-hidden bg-black"
+                :style="stageStyle(demo.src)"
+              >
+                <video
+                  :ref="(el) => setVideoRef(demo.src, el)"
+                  :src="`${demo.src}#t=0.1`"
+                  class="h-full w-full object-contain"
+                  playsinline
+                  preload="metadata"
+                  :controls="playingSrc === demo.src"
+                  @loadedmetadata="onVideoMeta(demo.src, $event)"
+                  @ended="onVideoEnded(demo.src)"
+                  @pause="onVideoPause(demo.src)"
+                />
+                <button
+                  v-if="playingSrc !== demo.src"
+                  type="button"
+                  class="demo-play absolute inset-0 flex items-center justify-center"
+                  :aria-label="t.play"
+                  @click="playDemo(demo.src)"
+                >
+                  <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#e44545] text-white shadow-[0_12px_30px_rgba(228,69,69,0.35)] transition-transform hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
+                    <svg class="ml-1 h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5.14v13.72a1 1 0 001.5.86l11-6.86a1 1 0 000-1.72l-11-6.86a1 1 0 00-1.5.86z" />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+              <div class="demo-caption flex items-center justify-between gap-3 px-4 py-3">
+                <p class="text-sm font-semibold">{{ demoLabel(demo, i) }}</p>
+                <button
+                  v-if="playingSrc !== demo.src"
+                  type="button"
+                  class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#e44545]"
+                  @click="playDemo(demo.src)"
+                >
+                  {{ t.play }}
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Teleport>
 
     <section class="cta relative px-6 pt-16 sm:px-10 lg:px-14">
       <div class="cta-glow" aria-hidden="true"></div>
@@ -116,6 +194,135 @@ const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const email = ref('')
 const router = useRouter()
 
+type DemoClip = {
+  src: string
+  label: { fr: string; en: string }
+}
+
+const solutionDemos: Record<string, DemoClip[]> = {
+  'Drop One': [
+    {
+      src: '/assets/dropone_demo_1.mp4',
+      label: {
+        fr: 'Présentation Drop One',
+        en: 'Drop One overview',
+      },
+    },
+  ],
+}
+
+const demoOpen = ref(false)
+const demoProduct = ref('')
+const activeDemos = ref<DemoClip[]>([])
+const playingSrc = ref<string | null>(null)
+const videoRefs = new Map<string, HTMLVideoElement>()
+const videoSizes = reactive<Record<string, { w: number; h: number }>>({})
+
+function demosFor(title: string) {
+  return solutionDemos[title] || []
+}
+
+function demoLabel(demo: DemoClip, index: number) {
+  return demo.label[locale.value] || `Demo ${index + 1}`
+}
+
+function setVideoRef(src: string, el: unknown) {
+  if (el instanceof HTMLVideoElement) videoRefs.set(src, el)
+  else videoRefs.delete(src)
+}
+
+function onVideoMeta(src: string, event: Event) {
+  const video = event.target as HTMLVideoElement
+  if (!video.videoWidth || !video.videoHeight) return
+  videoSizes[src] = { w: video.videoWidth, h: video.videoHeight }
+}
+
+function stageStyle(src: string) {
+  const size = videoSizes[src] || { w: 9, h: 16 }
+  const portrait = size.h >= size.w
+  if (portrait) {
+    return {
+      aspectRatio: `${size.w} / ${size.h}`,
+      height: 'min(68vh, 34rem)',
+      width: 'auto',
+      maxWidth: '100%',
+    }
+  }
+  return {
+    aspectRatio: `${size.w} / ${size.h}`,
+    width: '100%',
+    maxHeight: 'min(68vh, 34rem)',
+  }
+}
+
+function openDemo(title: string) {
+  const demos = demosFor(title)
+  if (!demos.length) return
+  demoProduct.value = title
+  activeDemos.value = demos
+  playingSrc.value = null
+  demoOpen.value = true
+  if (import.meta.client) document.documentElement.style.overflow = 'hidden'
+}
+
+function pauseAll() {
+  videoRefs.forEach((video) => {
+    video.pause()
+    video.currentTime = 0
+  })
+  playingSrc.value = null
+}
+
+function closeDemo() {
+  pauseAll()
+  demoOpen.value = false
+  demoProduct.value = ''
+  activeDemos.value = []
+  if (import.meta.client) document.documentElement.style.overflow = ''
+}
+
+async function playDemo(src: string) {
+  videoRefs.forEach((video, key) => {
+    if (key === src) return
+    video.pause()
+    video.currentTime = 0
+  })
+  playingSrc.value = src
+  await nextTick()
+  const video = videoRefs.get(src)
+  if (!video) return
+  try {
+    await video.play()
+  } catch {
+    playingSrc.value = null
+  }
+}
+
+function onVideoEnded(src: string) {
+  if (playingSrc.value === src) playingSrc.value = null
+}
+
+function onVideoPause(src: string) {
+  const video = videoRefs.get(src)
+  if (!video || video.ended) return
+  if (playingSrc.value === src && video.paused && video.currentTime > 0.2) {
+    // keep controls visible while paused mid-playback
+  }
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape' && demoOpen.value) closeDemo()
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKeydown)
+  if (demoOpen.value) document.documentElement.style.overflow = ''
+})
+
 const copy = {
   fr: {
     badge: 'SERVICES',
@@ -128,6 +335,9 @@ const copy = {
     solutionsWord: 'solutions',
     solutionsLead: 'Nous concevons des outils performants, pensés pour vos enjeux métiers.',
     demo: 'Démo →',
+    demoTitle: 'Vidéos de démonstration',
+    play: 'Lire',
+    close: 'Fermer',
     visit: 'Voir le site →',
     ctaTitle: 'Un projet en tête ?',
     ctaBody: 'Dites quelque chose pour démarrer une discussion en direct !',
@@ -179,6 +389,9 @@ const copy = {
     solutionsWord: 'solutions',
     solutionsLead: 'We design high-performing tools, shaped around your business needs.',
     demo: 'Demo →',
+    demoTitle: 'Demo videos',
+    play: 'Play',
+    close: 'Close',
     visit: 'Visit the site →',
     ctaTitle: 'A project in mind?',
     ctaBody: 'Say something to start a conversation right away.',
@@ -293,5 +506,66 @@ usePageSeo({
 .cta-mail {
   width: 88%;
   margin-bottom: 0.35rem;
+}
+
+.demo-modal {
+  background: rgba(17, 17, 17, 0.45);
+  backdrop-filter: blur(6px);
+  color: #111;
+}
+
+.demo-panel {
+  background: #f3f1ef;
+  border: 1px solid #e8e4e1;
+}
+
+.demo-close {
+  background: rgba(17, 17, 17, 0.06);
+  color: #111;
+}
+
+.demo-close:hover {
+  background: rgba(17, 17, 17, 0.1);
+}
+
+.demo-item {
+  background: #fff;
+  border: 1px solid #ece7e4;
+}
+
+.demo-play {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.28));
+}
+
+.demo-caption {
+  color: #111;
+}
+
+.demo-modal.is-dark {
+  background: rgba(0, 0, 0, 0.72);
+  color: #f7f7f7;
+}
+
+.demo-modal.is-dark .demo-panel {
+  background: #141414;
+  border-color: #2a2a2a;
+}
+
+.demo-modal.is-dark .demo-close {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.demo-modal.is-dark .demo-close:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.demo-modal.is-dark .demo-item {
+  background: #101010;
+  border-color: #2a2a2a;
+}
+
+.demo-modal.is-dark .demo-caption {
+  color: #f7f7f7;
 }
 </style>
