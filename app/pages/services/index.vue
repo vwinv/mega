@@ -92,7 +92,7 @@
         :aria-label="t.demoTitle"
         @click.self="closeDemo"
       >
-        <div class="demo-panel relative flex max-h-[min(92vh,52rem)] w-full max-w-[26rem] flex-col overflow-hidden rounded-[1.6rem] p-4 shadow-[0_24px_60px_rgba(0,0,0,0.28)] sm:max-w-[28rem] sm:p-5">
+        <div class="demo-panel relative flex max-h-[min(92vh,40rem)] w-full max-w-[56rem] flex-col overflow-hidden rounded-[1.6rem] p-4 shadow-[0_24px_60px_rgba(0,0,0,0.28)] sm:p-5">
           <div class="mb-4 flex shrink-0 items-start justify-between gap-4">
             <div>
               <p class="text-[11px] font-bold tracking-[0.16em] text-[#e44545]">{{ demoProduct }}</p>
@@ -108,10 +108,10 @@
             </button>
           </div>
 
-          <ul class="min-h-0 space-y-4 overflow-y-auto">
-            <li v-for="(demo, i) in activeDemos" :key="demo.src" class="demo-item overflow-hidden rounded-[1.25rem]">
+          <ul class="demo-grid min-h-0 grid grid-cols-3 gap-3 overflow-y-auto sm:gap-4">
+            <li v-for="(demo, i) in activeDemos" :key="demo.src" class="demo-item flex min-w-0 flex-col overflow-hidden rounded-[1rem]">
               <div
-                class="demo-stage relative mx-auto overflow-hidden bg-black"
+                class="demo-stage relative mx-auto w-full overflow-hidden bg-black"
                 :style="stageStyle(demo.src)"
               >
                 <video
@@ -132,19 +132,19 @@
                   :aria-label="t.play"
                   @click="playDemo(demo.src)"
                 >
-                  <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#e44545] text-white shadow-[0_12px_30px_rgba(228,69,69,0.35)] transition-transform hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
-                    <svg class="ml-1 h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#e44545] text-white shadow-[0_8px_20px_rgba(228,69,69,0.35)] transition-transform hover:scale-105 sm:h-12 sm:w-12">
+                    <svg class="ml-0.5 h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                       <path d="M8 5.14v13.72a1 1 0 001.5.86l11-6.86a1 1 0 000-1.72l-11-6.86a1 1 0 00-1.5.86z" />
                     </svg>
                   </span>
                 </button>
               </div>
-              <div class="demo-caption flex items-center justify-between gap-3 px-4 py-3">
-                <p class="text-sm font-semibold">{{ demoLabel(demo, i) }}</p>
+              <div class="demo-caption flex items-center justify-between gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5">
+                <p class="truncate text-[11px] font-semibold sm:text-xs">{{ demoLabel(demo, i) }}</p>
                 <button
                   v-if="playingSrc !== demo.src"
                   type="button"
-                  class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#e44545]"
+                  class="inline-flex shrink-0 items-center gap-1 text-[11px] font-semibold text-[#e44545] sm:text-xs"
                   @click="playDemo(demo.src)"
                 >
                   {{ t.play }}
@@ -253,19 +253,10 @@ function onVideoMeta(src: string, event: Event) {
 
 function stageStyle(src: string) {
   const size = videoSizes[src] || { w: 9, h: 16 }
-  const portrait = size.h >= size.w
-  if (portrait) {
-    return {
-      aspectRatio: `${size.w} / ${size.h}`,
-      height: 'min(68vh, 34rem)',
-      width: 'auto',
-      maxWidth: '100%',
-    }
-  }
   return {
     aspectRatio: `${size.w} / ${size.h}`,
     width: '100%',
-    maxHeight: 'min(68vh, 34rem)',
+    maxHeight: 'min(42vh, 18rem)',
   }
 }
 
