@@ -208,6 +208,20 @@ const solutionDemos: Record<string, DemoClip[]> = {
         en: 'Drop One overview',
       },
     },
+    {
+      src: '/assets/dropone_demo_2.mp4',
+      label: {
+        fr: 'Démonstration 2',
+        en: 'Demo 2',
+      },
+    },
+    {
+      src: '/assets/dropone_demo_3.mp4',
+      label: {
+        fr: 'Démonstration 3',
+        en: 'Demo 3',
+      },
+    },
   ],
 }
 
