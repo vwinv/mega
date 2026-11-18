@@ -140,7 +140,7 @@
                 </button>
               </div>
               <div class="demo-caption flex items-center justify-between gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5">
-                <p class="truncate text-[11px] font-semibold sm:text-xs">{{ demoLabel(demo, i) }}</p>
+                <p class="line-clamp-2 text-[11px] font-semibold leading-snug sm:text-xs">{{ demoLabel(demo, i) }}</p>
                 <button
                   v-if="playingSrc !== demo.src"
                   type="button"
@@ -211,15 +211,15 @@ const solutionDemos: Record<string, DemoClip[]> = {
     {
       src: '/assets/dropone_demo_2.mp4',
       label: {
-        fr: 'Démonstration 2',
-        en: 'Demo 2',
+        fr: 'Découvrez votre espace pro sur DropOne',
+        en: 'Discover your pro space on DropOne',
       },
     },
     {
       src: '/assets/dropone_demo_3.mp4',
       label: {
-        fr: 'Démonstration 3',
-        en: 'Demo 3',
+        fr: 'Votre portfolio désormais disponible sur DropOne',
+        en: 'Your portfolio now available on DropOne',
       },
     },
   ],
