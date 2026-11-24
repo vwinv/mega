@@ -124,6 +124,8 @@
 </template>
 
 <script setup lang="ts">
+import { FORM_DRAFT_KEYS, loadFormDraft } from '~/utils/form-draft'
+
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
 const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const route = useRoute()
@@ -205,6 +207,12 @@ const t = computed(() => copy[locale.value])
 
 async function openBrief() {
   showBrief.value = true
+  if (route.query.devis == null) {
+    await router.replace({
+      path: route.path,
+      query: { ...route.query, devis: '1' },
+    })
+  }
   await nextTick()
   briefAnchor.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
@@ -212,7 +220,8 @@ async function openBrief() {
 function closeBrief() {
   showBrief.value = false
   if (route.query.devis != null) {
-    router.replace({ path: '/services/branding', query: {} })
+    const { devis: _devis, ...query } = route.query
+    router.replace({ path: route.path, query })
   }
 }
 
@@ -221,7 +230,18 @@ function goContact() {
 }
 
 onMounted(() => {
-  if (route.query.devis != null) openBrief()
+  const draft = loadFormDraft<{
+    answers?: Record<string, unknown>
+    stepIndex?: number
+    screenIndex?: number
+  }>(FORM_DRAFT_KEYS.branding)
+  const hasDraft = !!draft && (
+    Object.keys(draft.answers || {}).length > 0 ||
+    Number(draft.stepIndex) > 0 ||
+    Number(draft.screenIndex) > 0
+  )
+
+  if (route.query.devis != null || hasDraft) void openBrief()
 })
 
 usePageSeo({

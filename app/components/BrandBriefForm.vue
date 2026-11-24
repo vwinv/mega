@@ -307,7 +307,12 @@ import {
   type BriefOption,
   type BriefQuestion,
 } from '~/utils/branding-brief'
-import { clearFormDraft, loadFormDraft, saveFormDraft } from '~/utils/form-draft'
+import {
+  clearFormDraft,
+  FORM_DRAFT_KEYS,
+  loadFormDraft,
+  saveFormDraft,
+} from '~/utils/form-draft'
 
 const LOGO_DESIGN_FIELDS = [
   'type_logo',
@@ -317,7 +322,7 @@ const LOGO_DESIGN_FIELDS = [
   'couleurs_eviter',
   'inspi',
 ] as const
-const DRAFT_KEY = 'mega:form-draft:branding:v1'
+const DRAFT_KEY = FORM_DRAFT_KEYS.branding
 
 type BrandDraft = {
   answers: Record<string, unknown>
@@ -714,6 +719,15 @@ onMounted(async () => {
 watch(
   [answers, stepIndex, screenIndex, maxReached],
   () => {
+    if (
+      Object.keys(answers).length === 0 &&
+      stepIndex.value === 0 &&
+      screenIndex.value === 0 &&
+      maxReached.value === 0
+    ) {
+      clearFormDraft(DRAFT_KEY)
+      return
+    }
     saveFormDraft(DRAFT_KEY, {
       answers,
       stepIndex: stepIndex.value,
@@ -721,7 +735,7 @@ watch(
       maxReached: maxReached.value,
     })
   },
-  { deep: true },
+  { deep: true, flush: 'sync' },
 )
 
 watch(screens, (list) => {

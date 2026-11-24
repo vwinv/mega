@@ -6,6 +6,11 @@ type StoredValue =
   | StoredValue[]
   | { [key: string]: StoredValue }
 
+export const FORM_DRAFT_KEYS = {
+  branding: 'mega:form-draft:branding:v1',
+  career: 'mega:form-draft:career:v1',
+} as const
+
 function toStoredValue(value: unknown): StoredValue | undefined {
   if (
     (typeof File !== 'undefined' && value instanceof File) ||

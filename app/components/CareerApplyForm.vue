@@ -199,9 +199,14 @@ import {
   optionValue,
   type ApplyQuestion,
 } from '~/utils/career-apply'
-import { clearFormDraft, loadFormDraft, saveFormDraft } from '~/utils/form-draft'
+import {
+  clearFormDraft,
+  FORM_DRAFT_KEYS,
+  loadFormDraft,
+  saveFormDraft,
+} from '~/utils/form-draft'
 
-const DRAFT_KEY = 'mega:form-draft:career:v1'
+const DRAFT_KEY = FORM_DRAFT_KEYS.career
 
 type CareerDraft = {
   answers: Record<string, unknown>
@@ -441,13 +446,21 @@ function resetForm() {
 watch(
   [answers, stepIndex, maxReached],
   () => {
+    if (
+      Object.keys(answers).length === 0 &&
+      stepIndex.value === 0 &&
+      maxReached.value === 0
+    ) {
+      clearFormDraft(DRAFT_KEY)
+      return
+    }
     saveFormDraft(DRAFT_KEY, {
       answers,
       stepIndex: stepIndex.value,
       maxReached: maxReached.value,
     })
   },
-  { deep: true },
+  { deep: true, flush: 'sync' },
 )
 </script>
 
