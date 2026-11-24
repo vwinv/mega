@@ -43,6 +43,13 @@
         >
           {{ t.about }}
         </NuxtLink>
+        <NuxtLink
+          to="/carriere"
+          class="rounded-full px-3 py-2 text-sm font-medium no-underline"
+          :class="isActive('/carriere') ? 'bg-[#e44545] text-white' : 'text-white/90 hover:text-white'"
+        >
+          {{ t.careers }}
+        </NuxtLink>
       </nav>
 
       <div class="ml-auto flex items-center gap-1.5 sm:gap-2">
@@ -167,6 +174,7 @@ const copy = {
     solutions: 'Solutions',
     projects: 'Projets',
     about: 'À propos',
+    careers: 'Carrière',
     contact: 'Contactez-nous',
     contactShort: 'Contact',
     theme: 'Changer le thème',
@@ -195,6 +203,7 @@ const copy = {
     solutions: 'Solutions',
     projects: 'Projects',
     about: 'About',
+    careers: 'Careers',
     contact: 'Contact us',
     contactShort: 'Contact',
     theme: 'Toggle theme',
@@ -226,6 +235,7 @@ const mobileLinks = computed(() => [
   { label: t.value.solutions, to: '/services#solutions' },
   { label: t.value.projects, to: '/projet' },
   { label: t.value.about, to: '/a-propos' },
+  { label: t.value.careers, to: '/carriere' },
 ])
 
 function setLocale(next: 'fr' | 'en') {

@@ -11,8 +11,8 @@
 <script setup lang="ts">
 const route = useRoute()
 const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
-const isHome = computed(() => route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/contact' || route.path === '/services' || route.path.startsWith('/services/'))
-const isDarkHome = computed(() => theme.value === 'dark' && (route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/services' || route.path.startsWith('/services/')))
+const isHome = computed(() => route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/contact' || route.path === '/carriere' || route.path.startsWith('/carriere/') || route.path === '/services' || route.path.startsWith('/services/'))
+const isDarkHome = computed(() => theme.value === 'dark' && (route.path === '/' || route.path === '/projet' || route.path === '/a-propos' || route.path === '/carriere' || route.path.startsWith('/carriere/') || route.path === '/services' || route.path.startsWith('/services/')))
 
 let revealObserver: IntersectionObserver | null = null
 let revealMutations: MutationObserver | null = null

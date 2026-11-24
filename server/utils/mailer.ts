@@ -310,3 +310,137 @@ export async function sendQuoteEmail(input: QuoteEmailInput) {
     attachments,
   })
 }
+
+type CareerEmailInput = {
+  firstName: string
+  lastName: string
+  email: string
+  phone?: string
+  offerTitle: string
+  answersText: string
+  attachments?: QuoteAttachment[]
+}
+
+export async function sendCareerEmail(input: CareerEmailInput) {
+  const to = getMailTo()
+  const from = getMailFrom()
+
+  if (!from) {
+    throw new Error("Mail configuration manquante: définis MAIL_FROM ou MAIL_USER/SMTP_USER.")
+  }
+
+  assertNoHeaderInjection(input.firstName, "firstName")
+  assertNoHeaderInjection(input.lastName, "lastName")
+  assertNoHeaderInjection(input.email, "email")
+  assertNoHeaderInjection(input.offerTitle, "offerTitle")
+  if (input.phone) {
+    assertNoHeaderInjection(input.phone, "phone")
+  }
+
+  const fullName = [input.firstName, input.lastName]
+    .filter((part) => part && part !== "-")
+    .join(" ")
+  const subjectFromPerson =
+    fullName.trim().length > 0 ? fullName.trim() : input.email
+
+  const uploadedFiles = (input.attachments || []).filter(
+    (file) => file?.filename && file?.content,
+  )
+
+  const text = [
+    "Nouvelle candidature reçue via le site MEGA.",
+    "",
+    `Offre: ${input.offerTitle}`,
+    "",
+    "Coordonnées:",
+    `Nom: ${fullName || "(non renseigné)"}`,
+    `Email: ${input.email}`,
+    `Telephone: ${input.phone || "(non renseigné)"}`,
+    "",
+    "Réponses du formulaire:",
+    input.answersText,
+    "",
+    uploadedFiles.length
+      ? `Fichiers joints: ${uploadedFiles.map((file) => file.filename).join(", ")}`
+      : "Aucun fichier joint.",
+  ].join("\n")
+
+  const safeName = escapeHtml(fullName || "(non renseigné)")
+  const safeEmail = escapeHtml(input.email)
+  const safePhone = escapeHtml(input.phone || "(non renseigné)")
+  const safeOffer = escapeHtml(input.offerTitle)
+  const phoneHref = input.phone
+    ? `tel:${escapeHtml(input.phone.replace(/\s+/g, ""))}`
+    : ""
+  const answersHtml = escapeHtml(input.answersText).replace(/\n/g, "<br>")
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<body style="margin:0;padding:0;background:#f4f2f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <div style="max-width:680px;margin:0 auto;padding:28px 16px;">
+    <div style="background:#111;color:#fff;border-radius:18px 18px 0 0;padding:22px 24px;">
+      <p style="margin:0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e44545;font-weight:700;">MEGA · Carrière</p>
+      <h1 style="margin:8px 0 0;font-size:22px;line-height:1.25;">Candidature — ${safeOffer}</h1>
+    </div>
+    <div style="background:#fff;border:1px solid #ece7e4;border-top:0;border-radius:0 0 18px 18px;padding:24px;">
+      <p style="margin:0 0 18px;color:#666;font-size:14px;line-height:1.5;">
+        Une nouvelle candidature a été soumise depuis le site. Répondre à ce mail contacte directement le candidat.
+      </p>
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin:0 0 18px;background:#faf8f7;border-radius:14px;">
+        <tr>
+          <td style="padding:14px 16px;color:#888;font-size:13px;width:34%;">Nom</td>
+          <td style="padding:14px 16px;color:#111;font-size:14px;font-weight:600;">${safeName}</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 16px;color:#888;font-size:13px;">Email</td>
+          <td style="padding:14px 16px;font-size:14px;font-weight:600;">
+            <a href="mailto:${safeEmail}" style="color:#2563eb;text-decoration:underline;">${safeEmail}</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:14px 16px;color:#888;font-size:13px;">Téléphone</td>
+          <td style="padding:14px 16px;font-size:14px;font-weight:600;">
+            ${
+              phoneHref
+                ? `<a href="${phoneHref}" style="color:#2563eb;text-decoration:underline;">${safePhone}</a>`
+                : safePhone
+            }
+          </td>
+        </tr>
+      </table>
+      <div style="margin:0 0 8px;color:#111;font-size:14px;font-weight:700;">Réponses du formulaire</div>
+      <div style="padding:16px;background:#faf8f7;border-radius:14px;color:#333;font-size:13px;line-height:1.6;">
+        ${answersHtml}
+      </div>
+      ${
+        uploadedFiles.length
+          ? `<p style="margin:16px 0 0;color:#666;font-size:13px;">Fichiers joints : ${uploadedFiles
+              .map((file) => escapeHtml(file.filename))
+              .join(", ")}</p>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>`
+
+  const transport = getTransporter()
+  const mailAttachments = uploadedFiles.map((file) => ({
+    filename: file.filename,
+    content: Buffer.isBuffer(file.content) ? file.content : Buffer.from(file.content),
+    contentType: file.contentType || "application/octet-stream",
+  }))
+
+  return transport.sendMail({
+    from,
+    to,
+    replyTo: {
+      name: subjectFromPerson,
+      address: input.email,
+    },
+    subject: `MEGA - Candidature - ${input.offerTitle} - ${subjectFromPerson}`,
+    text,
+    html,
+    attachments: mailAttachments,
+  })
+}

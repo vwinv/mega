@@ -19,10 +19,14 @@ function isAllowedFile(filename: string, type: string) {
     lower.endsWith(".webp") ||
     lower.endsWith(".gif") ||
     lower.endsWith(".svg") ||
-    lower.endsWith(".pdf")
+    lower.endsWith(".pdf") ||
+    lower.endsWith(".doc") ||
+    lower.endsWith(".docx")
   const byType =
     type.startsWith("image/") ||
     type === "application/pdf" ||
+    type === "application/msword" ||
+    type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
     type === "application/octet-stream" ||
     type === ""
   return byExt && byType

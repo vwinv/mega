@@ -30,6 +30,7 @@
             <NuxtLink to="/a-propos" class="text-white/80 no-underline hover:text-white">{{ t.about }}</NuxtLink>
             <NuxtLink to="/services" class="text-white/80 no-underline hover:text-white">{{ t.services }}</NuxtLink>
             <NuxtLink to="/projet" class="text-white/80 no-underline hover:text-white">{{ t.projects }}</NuxtLink>
+            <NuxtLink to="/carriere" class="text-white/80 no-underline hover:text-white">{{ t.careers }}</NuxtLink>
             <NuxtLink to="/contact" class="text-white/80 no-underline hover:text-white">{{ t.contact }}</NuxtLink>
           </nav>
         </div>
@@ -62,6 +63,7 @@ const translations = {
     about: 'À propos',
     services: 'Services',
     projects: 'Projets',
+    careers: 'Carrière',
     contact: 'Contact',
     legal: 'Légale',
     privacy: 'Politique de confidentialité',
@@ -73,6 +75,7 @@ const translations = {
     about: 'About',
     services: 'Services',
     projects: 'Projects',
+    careers: 'Careers',
     contact: 'Contact',
     legal: 'Legal',
     privacy: 'Privacy policy',
