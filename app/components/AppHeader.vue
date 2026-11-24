@@ -96,13 +96,13 @@
         <div class="p-2">
           <p class="px-2 text-[11px] font-medium text-white/45">{{ t.expertisesLabel }}</p>
           <ul class="mt-3 space-y-2">
-            <li v-for="(item, i) in t.expertises" :key="item">
+            <li v-for="(item, i) in t.expertises" :key="item.to">
               <NuxtLink
-                to="/services"
+                :to="item.to"
                 class="mega-expertise flex items-center justify-between rounded-full border border-white/15 px-4 py-3 text-sm font-semibold text-white no-underline"
                 @click="servicesOpen = false"
               >
-                <span><span class="mega-index mr-3 text-white/40">0{{ i + 1 }}</span>{{ item }}</span>
+                <span><span class="mega-index mr-3">0{{ i + 1 }}</span>{{ item.label }}</span>
                 <span class="mega-arrow" aria-hidden="true">→</span>
               </NuxtLink>
             </li>
@@ -176,9 +176,10 @@ const copy = {
     idea: 'Un projet en tête ?',
     talk: 'Parlons-en',
     expertises: [
-      'Conception de solutions digitales',
-      'Développement & infrastructure',
-      'Solutions intelligentes (IA)',
+      { label: 'Conception de solutions digitales', to: '/services/conception-de-solutions-digitales' },
+      { label: 'Développement & infrastructure', to: '/services/developpement-infrastructure' },
+      { label: 'Solutions intelligentes (IA)', to: '/services/solutions-intelligentes-ia' },
+      { label: 'Branding', to: '/services/branding' },
     ],
     solutionItems: [
       { title: 'Drop One', body: 'Votre carte de visite numérique, à partager en un instant.' },
@@ -203,9 +204,10 @@ const copy = {
     idea: 'A project in mind?',
     talk: "Let's talk",
     expertises: [
-      'Digital solution design',
-      'Development & infrastructure',
-      'Intelligent solutions (AI)',
+      { label: 'Digital solution design', to: '/services/conception-de-solutions-digitales' },
+      { label: 'Development & infrastructure', to: '/services/developpement-infrastructure' },
+      { label: 'Intelligent solutions (AI)', to: '/services/solutions-intelligentes-ia' },
+      { label: 'Branding', to: '/services/branding' },
     ],
     solutionItems: [
       { title: 'Drop One', body: 'Your digital business card, ready to share in an instant.' },
@@ -279,23 +281,21 @@ watch(() => route.path, () => {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
+.mega-index {
+  color: #e44545;
+}
+
+.mega-arrow {
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s ease;
+}
+
 .mega-expertise:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-band.is-dark .mega-index,
-.nav-band.is-dark .mega-arrow {
-  color: #e88986;
-}
-
-.nav-band.is-dark .mega-expertise:hover {
   border-color: #e44545;
-  background: linear-gradient(90deg, rgba(92, 24, 28, 0.95), rgba(32, 12, 14, 0.92));
+  background: linear-gradient(90deg, rgba(92, 24, 28, 0.55), rgba(20, 20, 20, 0.2));
 }
 
-.nav-band.is-dark .mega-expertise:hover .mega-index,
-.nav-band.is-dark .mega-expertise:hover .mega-arrow {
+.mega-expertise:hover .mega-arrow {
   color: #e44545;
 }
 

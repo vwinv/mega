@@ -407,8 +407,8 @@ export default defineEventHandler(async (event) => {
       return {
         reply:
           locale === 'en'
-            ? 'Your project brief has been generated and sent to the MEGA team at contact@mega-sn.com. We will get back to you within 24 hours maximum.'
-            : 'Votre cahier de charges a ete genere et envoye a l equipe MEGA sur contact@mega-sn.com. Nous reviendrons vers vous sous 24h maximum.',
+            ? 'Your project brief has been generated and sent to the MEGA team. We will get back to you within 24 hours maximum.'
+            : 'Votre cahier de charges a ete genere et envoye a l equipe MEGA. Nous reviendrons vers vous sous 24h maximum.',
         state: mergedState,
       }
     }

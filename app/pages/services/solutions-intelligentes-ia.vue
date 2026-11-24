@@ -145,6 +145,7 @@ const copy = {
     otherItems: [
       { label: '01 · Conception de solutions digitales ↗', to: '/services/conception-de-solutions-digitales' },
       { label: '02 · Développement & infrastructure ↗', to: '/services/developpement-infrastructure' },
+      { label: '04 · Branding ↗', to: '/services/branding' },
     ],
     ctaTitle: 'Un projet en tête ?',
     ctaBody: 'Dites quelque chose pour démarrer une discussion en direct !',
@@ -174,6 +175,7 @@ const copy = {
     otherItems: [
       { label: '01 · Digital solution design ↗', to: '/services/conception-de-solutions-digitales' },
       { label: '02 · Development & infrastructure ↗', to: '/services/developpement-infrastructure' },
+      { label: '04 · Branding ↗', to: '/services/branding' },
     ],
     ctaTitle: 'A project in mind?',
     ctaBody: 'Say something to start a conversation right away.',

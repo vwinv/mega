@@ -72,11 +72,11 @@
         <div class="mt-3 flex flex-wrap gap-3">
           <NuxtLink
             v-for="item in t.otherItems"
-            :key="item"
-            to="/services"
+            :key="item.label"
+            :to="item.to"
             class="other-link inline-flex items-center rounded-full border border-[#e6e1de] bg-white px-4 py-2.5 text-sm font-semibold text-[#111] no-underline hover:border-[#e44545]"
           >
-            {{ item }}
+            {{ item.label }}
           </NuxtLink>
         </div>
       </div>
@@ -138,7 +138,11 @@ const copy = {
       { title: 'Construire', text: 'Conception et déploiement de solutions sur mesure.', tone: 'bg-[#e44545] text-white', num: 'text-white/70', body: 'text-white/90' },
     ],
     others: 'Autres expertises',
-    otherItems: ['02 · Développement & infrastructure ↗', '03 · Solutions intelligentes (IA) ↗'],
+    otherItems: [
+      { label: '02 · Développement & infrastructure ↗', to: '/services/developpement-infrastructure' },
+      { label: '03 · Solutions intelligentes (IA) ↗', to: '/services/solutions-intelligentes-ia' },
+      { label: '04 · Branding ↗', to: '/services/branding' },
+    ],
     ctaTitle: 'Un projet en tête ?',
     ctaBody: 'Dites quelque chose pour démarrer une discussion en direct !',
     email: 'Votre adresse e-mail',
@@ -160,7 +164,11 @@ const copy = {
       { title: 'Build', text: 'Design and rollout of tailor-made solutions.', tone: 'bg-[#e44545] text-white', num: 'text-white/70', body: 'text-white/90' },
     ],
     others: 'Other expertise',
-    otherItems: ['02 · Development & infrastructure ↗', '03 · Intelligent solutions (AI) ↗'],
+    otherItems: [
+      { label: '02 · Development & infrastructure ↗', to: '/services/developpement-infrastructure' },
+      { label: '03 · Intelligent solutions (AI) ↗', to: '/services/solutions-intelligentes-ia' },
+      { label: '04 · Branding ↗', to: '/services/branding' },
+    ],
     ctaTitle: 'A project in mind?',
     ctaBody: 'Say something to start a conversation right away.',
     email: 'Your email address',

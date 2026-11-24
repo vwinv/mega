@@ -19,7 +19,7 @@
     </section>
 
     <section class="px-6 py-8 sm:px-10 lg:px-14">
-      <div class="grid gap-5 lg:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <article v-for="(item, i) in t.expertises" :key="item.title" class="expertise-card reveal flex flex-col rounded-[1.7rem] bg-white p-6 shadow-[0_16px_40px_rgba(0,0,0,0.04)] sm:p-7" :style="{ transitionDelay: `${i * 120}ms` }">
           <div class="flex items-start justify-between">
             <p class="text-4xl font-extrabold tracking-tight text-[#e44545]">{{ item.num }}</p>
@@ -375,6 +375,13 @@ const copy = {
         points: ['Automatisation avec IA', 'Analyse de données', 'Assistants intelligents pour entreprises'],
         to: '/services/solutions-intelligentes-ia',
       },
+      {
+        num: '04',
+        title: 'Branding',
+        lead: "Merci de nous confier la création de votre marque. Ce formulaire nous aide à comprendre votre projet, votre public et l'image que vous souhaitez donner, pour concevoir une identité qui vous ressemble vraiment.",
+        points: ['Logo et ses déclinaisons', 'Palette de couleurs et typographies', 'Charte graphique / guide de marque', 'Supports imprimés et digitaux'],
+        to: '/services/branding',
+      },
     ],
     solutions: [
       { title: 'Drop One', body: 'Développez votre réseau, partagez votre identité professionnelle et saisissez de nouvelles opportunités avec DropOne, votre carte de visite numérique en un instant.', site: 'https://www.dropone.pro/' },
@@ -428,6 +435,13 @@ const copy = {
         lead: 'Use artificial intelligence to drive your performance and innovation.',
         points: ['AI automation', 'Data analysis', 'Intelligent business assistants'],
         to: '/services/solutions-intelligentes-ia',
+      },
+      {
+        num: '04',
+        title: 'Branding',
+        lead: 'Thank you for trusting us with the creation of your brand. This form helps us understand your project, your audience and the image you want to convey, so we can design an identity that truly reflects you.',
+        points: ['Logo and its variations', 'Colour palette and typography', 'Brand guidelines', 'Print and digital assets'],
+        to: '/services/branding',
       },
     ],
     solutions: [
