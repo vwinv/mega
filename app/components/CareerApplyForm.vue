@@ -199,16 +199,36 @@ import {
   optionValue,
   type ApplyQuestion,
 } from '~/utils/career-apply'
+import { clearFormDraft, loadFormDraft, saveFormDraft } from '~/utils/form-draft'
+
+const DRAFT_KEY = 'mega:form-draft:career:v1'
+
+type CareerDraft = {
+  answers: Record<string, unknown>
+  stepIndex: number
+  maxReached: number
+}
 
 const locale = useState<'fr' | 'en'>('locale', () => 'fr')
 const theme = useState<'light' | 'dark'>('mega-theme', () => 'light')
 const route = useRoute()
 
-onMounted(() => {
+onMounted(async () => {
+  const draft = loadFormDraft<CareerDraft>(DRAFT_KEY)
+  if (draft?.answers && typeof draft.answers === 'object') {
+    Object.assign(answers, draft.answers)
+    const lastStep = Math.max(0, steps.value.length - 1)
+    const restoredStep = Number.isInteger(draft.stepIndex) ? draft.stepIndex : 0
+    stepIndex.value = Math.min(Math.max(0, restoredStep), lastStep)
+    maxReached.value = Math.min(
+      Math.max(stepIndex.value, Number.isInteger(draft.maxReached) ? draft.maxReached : 0),
+      lastStep,
+    )
+  }
+
   if (route.hash !== '#postuler') return
-  nextTick(() => {
-    document.getElementById('postuler')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  })
+  await nextTick()
+  document.getElementById('postuler')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 })
 
 const steps = computed(() => getApplySteps(locale.value))
@@ -399,6 +419,7 @@ async function submitForm() {
       method: 'POST',
       body: form,
     })
+    clearFormDraft(DRAFT_KEY)
     done.value = true
   } catch (err: any) {
     submitError.value = err?.data?.message || err?.message || ui.value.error
@@ -408,6 +429,7 @@ async function submitForm() {
 }
 
 function resetForm() {
+  clearFormDraft(DRAFT_KEY)
   Object.keys(answers).forEach((key) => delete answers[key])
   stepIndex.value = 0
   maxReached.value = 0
@@ -415,6 +437,18 @@ function resetForm() {
   submitError.value = ''
   done.value = false
 }
+
+watch(
+  [answers, stepIndex, maxReached],
+  () => {
+    saveFormDraft(DRAFT_KEY, {
+      answers,
+      stepIndex: stepIndex.value,
+      maxReached: maxReached.value,
+    })
+  },
+  { deep: true },
+)
 </script>
 
 <style scoped>

@@ -307,6 +307,7 @@ import {
   type BriefOption,
   type BriefQuestion,
 } from '~/utils/branding-brief'
+import { clearFormDraft, loadFormDraft, saveFormDraft } from '~/utils/form-draft'
 
 const LOGO_DESIGN_FIELDS = [
   'type_logo',
@@ -316,6 +317,14 @@ const LOGO_DESIGN_FIELDS = [
   'couleurs_eviter',
   'inspi',
 ] as const
+const DRAFT_KEY = 'mega:form-draft:branding:v1'
+
+type BrandDraft = {
+  answers: Record<string, unknown>
+  stepIndex: number
+  screenIndex: number
+  maxReached: number
+}
 
 const emit = defineEmits<{ close: [] }>()
 
@@ -663,6 +672,7 @@ async function submit() {
       method: 'POST',
       body: form,
     })
+    clearFormDraft(DRAFT_KEY)
     done.value = true
   } catch (err: any) {
     submitError.value = err?.data?.message || err?.message || ui.value.error
@@ -672,6 +682,7 @@ async function submit() {
 }
 
 function resetForm() {
+  clearFormDraft(DRAFT_KEY)
   Object.keys(answers).forEach((key) => delete answers[key])
   stepIndex.value = 0
   screenIndex.value = 0
@@ -680,6 +691,38 @@ function resetForm() {
   submitError.value = ''
   done.value = false
 }
+
+onMounted(async () => {
+  const draft = loadFormDraft<BrandDraft>(DRAFT_KEY)
+  if (!draft || !draft.answers || typeof draft.answers !== 'object') return
+
+  Object.assign(answers, draft.answers)
+  const lastStep = Math.max(0, steps.value.length - 1)
+  const restoredStep = Number.isInteger(draft.stepIndex) ? draft.stepIndex : 0
+  stepIndex.value = Math.min(Math.max(0, restoredStep), lastStep)
+  maxReached.value = Math.min(
+    Math.max(stepIndex.value, Number.isInteger(draft.maxReached) ? draft.maxReached : 0),
+    lastStep,
+  )
+
+  await nextTick()
+  const lastScreen = Math.max(0, screens.value.length - 1)
+  const restoredScreen = Number.isInteger(draft.screenIndex) ? draft.screenIndex : 0
+  screenIndex.value = Math.min(Math.max(0, restoredScreen), lastScreen)
+})
+
+watch(
+  [answers, stepIndex, screenIndex, maxReached],
+  () => {
+    saveFormDraft(DRAFT_KEY, {
+      answers,
+      stepIndex: stepIndex.value,
+      screenIndex: screenIndex.value,
+      maxReached: maxReached.value,
+    })
+  },
+  { deep: true },
+)
 
 watch(screens, (list) => {
   if (screenIndex.value > list.length - 1) screenIndex.value = Math.max(0, list.length - 1)
